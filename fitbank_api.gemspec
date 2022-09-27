@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/fitbank_api/version'
 
 Gem::Specification.new do |spec|
@@ -8,8 +10,8 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Wrapper classes for the FitBank REST API'
   spec.description   = 'Contains classes which can be used to perform PIX payments using the FitBank REST API'
-  spec.homepage      = "https://github.com/latamgateway/fitbank_api"
-  spec.required_ruby_version = "~> 3.1.0"
+  spec.homepage      = 'https://github.com/latamgateway/fitbank_api'
+  spec.required_ruby_version = '~> 3.1.0'
 
   spec.license = 'MIT'
 
@@ -28,17 +30,18 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('builder')
   spec.add_dependency('bundler')
+  spec.add_dependency('cpf_cnpj', '~> 0.5.0')
   spec.add_dependency('rake')
   spec.add_dependency('sorbet-static-and-runtime', '~> 0.5.0')
-  spec.add_dependency('require_all')
 
-  spec.add_development_dependency('rubocop')
-  spec.add_development_dependency('yard')
-  spec.add_development_dependency('tapioca')
+  spec.add_development_dependency('dotenv', '~> 2.8.0')
+  spec.add_development_dependency('factory_bot', '~> 6.1')
   spec.add_development_dependency('pry-byebug', '~> 3.9')
   spec.add_development_dependency('rspec', '~> 3.10')
+  spec.add_development_dependency('rubocop')
+  spec.add_development_dependency('tapioca')
   spec.add_development_dependency('vcr', '~> 6.0')
+  spec.add_development_dependency('yard')
   # spec.add_development_dependency('uuid', '~> 2.3', '>= 2.3.9')
   # spec.add_development_dependency('webmock', '~> 3.13')
-  # spec.add_development_dependency('dotenv', '~> 2.7', '>= 2.7.6')
 end

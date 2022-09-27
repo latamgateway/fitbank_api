@@ -3,3 +3,9 @@ Gemfile.lock
 bin/
 *.gem
 sorbet/
+doc/
+.yardoc/
+
+.byebug_history
+
+.env.test.local
