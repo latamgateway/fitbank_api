@@ -126,7 +126,7 @@ module FitBankApi
 
         raise FitBankApi::Errors::BaseApiError, body if body['Success'] == 'false'
 
-        body['MaxLimit'].to_i
+        Integer(body['MaxLimit'])
       end
 
       private
@@ -150,19 +150,19 @@ module FitBankApi
       # return [Hash] Hash representing the payload for setting PixOut limit
       def generate_set_limit_payload(type:, subtype:, min_value:, max_value:)
         {
-          'Method': 'ChangeAccountOperationLimit',
-          'PartnerId': @credentials.partner_id,
-          'BusinessUnitId': @credentials.business_unit_id,
-          'TaxNumber': @credentials.cnpj,
-          'Bank': @bank_info.bank_code,
-          'BankBranch': @bank_info.bank_agency,
-          'BankAccount': @bank_info.bank_account,
-          'BankAccountDigit': @bank_info.bank_account_digit,
-          'OperationType': PIXOUT_OPERATION_TYPE,
-          'Type': type.to_i,
-          'SubType': subtype.to_i,
-          'MinLimitValue': min_value,
-          'MaxLimitValue': max_value
+          Method: 'ChangeAccountOperationLimit',
+          PartnerId: @credentials.partner_id,
+          BusinessUnitId: @credentials.business_unit_id,
+          TaxNumber: @credentials.cnpj,
+          Bank: @bank_info.bank_code,
+          BankBranch: @bank_info.bank_agency,
+          BankAccount: @bank_info.bank_account,
+          BankAccountDigit: @bank_info.bank_account_digit,
+          OperationType: PIXOUT_OPERATION_TYPE,
+          Type: type.to_i,
+          SubType: subtype.to_i,
+          MinLimitValue: min_value,
+          MaxLimitValue: max_value
         }
       end
 
@@ -174,17 +174,17 @@ module FitBankApi
       # return [Hash] Hash representing the payload for getting PixOut limit
       def generate_get_limit_payload(type:, subtype:)
         {
-          "Method": 'GetAccountOperationLimit',
-          "PartnerId": @credentials.partner_id,
-          "BusinessUnitId": @credentials.business_unit_id,
-          "TaxNumber": @credentials.cnpj,
-          "Bank": @bank_info.bank_code,
-          "BankBranch": @bank_info.bank_agency,
-          "BankAccount": @bank_info.bank_account,
-          "BankAccountDigit": @bank_info.bank_account_digit,
-          "OperationType": PIXOUT_OPERATION_TYPE,
-          "Type": type.to_i,
-          "SubType": subtype.to_i
+          Method: 'GetAccountOperationLimit',
+          PartnerId: @credentials.partner_id,
+          BusinessUnitId: @credentials.business_unit_id,
+          TaxNumber: @credentials.cnpj,
+          Bank: @bank_info.bank_code,
+          BankBranch: @bank_info.bank_agency,
+          BankAccount: @bank_info.bank_account,
+          BankAccountDigit: @bank_info.bank_account_digit,
+          OperationType: PIXOUT_OPERATION_TYPE,
+          Type: type.to_i,
+          SubType: subtype.to_i
         }
       end
 
