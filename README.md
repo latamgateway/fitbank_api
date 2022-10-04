@@ -25,7 +25,12 @@ Use rspec to run tests. Tests require some [environment variables](#environment-
 
 # Environment variables
 
- * SENDER_CNPJ - Latam company CNPJ. Use when creating payouts
+ * LATAM_CNPJ - Latam company CNPJ. Use when creating payouts
+ * The following describe latam bank information
+    * LATAM_BANK_CODE
+    * LATAM_BANK_AGENCY (This reffered as BankBranch in fitbank api)
+    * LATAM_BANK_ACCOUNT
+    * LATAM_BANK_ACCOUNT_DIGIT
  * FITBANK_KEY - Username for the FitBank API used for authentication
  * FITBANK_SECRET - Password for the FitBank API used for authentication
  * FITBANK_BASE_URL - Base Path to FitBank sandbox environment (for sandbox use https://sandboxapi.fitbank.com.br)
