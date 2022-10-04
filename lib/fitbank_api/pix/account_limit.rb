@@ -71,23 +71,31 @@ module FitBankApi
         end
       end
 
-      sig { params(credentials: FitBankApi::Entities::Credentials, bank_info: FitBankApi::Entities::BankInfo).void }
+      sig do
+        params(
+          credentials: FitBankApi::Entities::Credentials,
+          bank_info: FitBankApi::Entities::BankInfo,
+          base_url: String
+        ).void
+      end
       # Create a wrapper used to set limits for PIX transactions.
       # @param [FitBankApi::Entities::Credentials] credentials The credentials for the user which is
       #   going to set the limits
       # @param [FitBankApi::Entities::BankInfo] bank_info Bank info of the account for which the limit
       #   is going to be set
+      # @param [String] base_url Base url to the FtiBank API
       def initialize(
         credentials:,
-        bank_info:
+        bank_info:,
+        base_url:
       )
         @credentials = credentials
         @bank_info = bank_info
         @limit_setter_url = T.let(
-          URI.join(ENV.fetch('FITBANK_BASE_URL'), 'main/execute/ChangeAccountOperationLimit'), URI::Generic
+          URI.join(base_url, 'main/execute/ChangeAccountOperationLimit'), URI::Generic
         )
         @limit_getter_url = T.let(
-          URI.join(ENV.fetch('FITBANK_BASE_URL'), 'main/execute/GetAccountOperationLimit'), URI::Generic
+          URI.join(base_url, 'main/execute/GetAccountOperationLimit'), URI::Generic
         )
       end
 
