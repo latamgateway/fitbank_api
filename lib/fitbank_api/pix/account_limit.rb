@@ -14,6 +14,8 @@ module FitBankApi
     # * Set limit: https://dev.fitbank.com.br/reference/261, https://dev.fitbank.com.br/docs/5-limit-management
     # @note In production you would also have to send an email to FitBank in
     #   order to set the limits.
+    # @todo Implement other all limits. Only daily_amount_limit is implemented. This is low priority as the API
+    #   for setting limits is not used on prod and in the sandbox it's broken.
     class AccountLimit
       extend T::Sig
 

@@ -123,7 +123,8 @@ module FitBankApi
           'PixKeyType': nil,
           'SearchProtocol': nil,
           'Description': 'Transfer',
-          'InitiationType': PAYMENT_TYPE[:manual]
+          'CustomerMessage': 'Transfer',
+          'OnlineTransfer': true
         }
         uri = URI.join(ENV.fetch('FITBANK_BASE_URL'), 'main/execute/GeneratePixOut')
         request = Net::HTTP::Post.new(uri)
