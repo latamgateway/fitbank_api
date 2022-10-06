@@ -3,7 +3,7 @@
 
 FactoryBot.define do
   factory :credentials, class: FitBankApi::Entities::Credentials do
-    cnpj { ENV['SENDER_CNPJ'] }
+    cnpj { ENV['LATAM_CNPJ'] }
     username { ENV['FITBANK_KEY'] }
     password { ENV['FITBANK_SECRET'] }
     mkt_place_id { ENV['MKT_PLACE_ID'].to_i }
