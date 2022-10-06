@@ -104,7 +104,7 @@ module FitBankApi
       # should not exceed the daily limit.
       # @param [Integer] daily_limit The daily limit for all PIX payments
       # @raise [FitBankApi::Errors::BaseApiError]
-      def daily_amount_limit=(daily_limit)
+      def update_daily_amount_limit(daily_limit)
         payload = generate_set_limit_payload(
           type: LimitType::Daily,
           subtype: LimitSubtype::Amount,

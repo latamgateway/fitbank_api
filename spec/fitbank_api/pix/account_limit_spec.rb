@@ -16,7 +16,7 @@ RSpec.describe FitBankApi::Pix::AccountLimit do
         bank_info:,
         base_url: ENV.fetch('FITBANK_BASE_URL')
       )
-      limit.daily_amount_limit = 50_000_000
+      limit.update_daily_amount_limit(50_000_000)
     end
   end
 
