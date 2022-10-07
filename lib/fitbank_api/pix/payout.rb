@@ -59,11 +59,6 @@ module FitBankApi
             T.absurd(self)
           end
         end
-
-        sig { returns(String) }
-        def to_s
-          to_i.to_s
-        end
       end
 
       sig do
@@ -145,7 +140,7 @@ module FitBankApi
           ToBankAccountDigit: @receiver_bank_info.bank_account_digit,
           # TODO: Make this a parameter. Although the values are integers
           # the API accepts this as string.
-          AccountType: AccountType::Current.to_s,
+          AccountType: AccountType::Current.to_i.to_s,
           Value: @value,
           # RateValue and RateValueType are used if the partner want's to incure
           # additinoal fee. For our current setup FitBank expects this to be 0.
