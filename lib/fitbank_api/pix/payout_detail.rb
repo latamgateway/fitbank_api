@@ -77,7 +77,7 @@ module FitBankApi
       #   separate API call.
       # @note The API is not working at the moment (07/10/2022). The bug is reported to FitBank.
       # @todo Make it so that one call to this returns all data and remove the page_index param.
-      # @returns [Array[FitBankApi::Entities::PayoutDetail]] The list of all payouts between start_date and end_date
+      # @return [Array[FitBankApi::Entities::PayoutDetail]] The list of all payouts between start_date and end_date
       def get_by_date(start_date, end_date, page_index)
         payload = {
           Method: 'GetPixOutById',
@@ -114,7 +114,7 @@ module FitBankApi
       # @todo Code duplication. Extract this so that all classes can use the post function.
       # @param [URI::Generic] url The endpoint
       # @param [Hash] payload The body
-      # @returns [Net::HTTPResponse]
+      # @return [Net::HTTPResponse]
       def post(url, payload)
         request = Net::HTTP::Post.new(url)
         request.body = payload.to_json
