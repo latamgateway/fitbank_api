@@ -23,6 +23,19 @@ module FitBankApi
         @bank_account = bank_account
         @bank_account_digit = bank_account_digit
       end
+
+      sig { returns(T::Hash[Symbol, T.untyped]) }
+      # Get a hash representation of the bank info. This can be directly
+      # merged into API endpoint payloads which require the bank info
+      # @return [Hash]
+      def to_h
+        {
+          Bank: @bank_code,
+          BankBranch: @bank_agency,
+          BankAccount: @bank_account,
+          BankAccountDigit: @bank_account_digit
+        }
+      end
     end
   end
 end
