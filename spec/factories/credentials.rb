@@ -12,12 +12,12 @@ FactoryBot.define do
 
     initialize_with do
       new(
-        cnpj:,
-        username:,
-        password:,
-        mkt_place_id:,
-        business_unit_id:,
-        partner_id:
+        cnpj: cnpj,
+        username: username,
+        password: password,
+        mkt_place_id: mkt_place_id,
+        business_unit_id: business_unit_id,
+        partner_id: partner_id
       )
     end
   end
