@@ -2,7 +2,11 @@
 # frozen_string_literal: true
 
 require 'bigdecimal'
+require 'bigdecimal/util'
 require 'date'
+require 'uri'
+require 'json'
+require 'net/http'
 
 module FitBankApi
   module Pix
@@ -113,26 +117,60 @@ module FitBankApi
         expiartion_date:,
         id: ''
       )
-        # Endpoint documentation: https://dev.fitbank.com.br/reference/255
+        # Endpoint documentation: https://dev.fitbank.com.br/reference/256
         # Fields which are not required are ommited for now
         # TODO: Check if passing receiver name and cpf will force FitBank to do the name/cpf checked
         payload = {
           Method: 'GenerateDynamicPixQRCode',
           PartnerId: @credentials.partner_id,
           BusinessUnitId: @credentials.business_unit_id,
-          PixKey: @receiver_pix_key,
+          PixKey: @credentials.cnpj,
           TaxNumber: @credentials.cnpj,
-          PrincipalValue: value,
-          ExpirationDate: expiartion_date.strftime('%d/%m/%Y'),
+          PayerTaxNumber: '65023491021',
+          PayerName: 'João da Silva Pereira',
+          PrincipalValue: 100,
+          ExpirationDate: '31/01/2023',
+          Address: {
+            AddressLine: 'Rua Niterói',
+            AddressLine2: 'string',
+            ZipCode: '60731-305',
+            Neighborhood: 'Canindezinho',
+            CityCode: '451',
+            CityName: 'Fortaleza',
+            State: 'Ceará',
+            AddressType: 1,
+            Country: 'Brasil',
+            Complement: 'Apto 01',
+            Reference: 'Próximo ao mercado'
+          },
           ChangeType: ChangeType::None.to_i,
-          # The Address object is required, but it can be empty
-          Address: {},
+          AdditionalData: [
+            {
+              Name: 'pagamento',
+              Value: '300'
+            }
+          ],
+          PayerRequest: 'pagamento',
           TransactionPurpose: TransactionPurpose::Withdraw.to_i,
           TransactionValue: nil,
           AgentModality: DEFAULT_AGENT_MODALITY,
-          TransactionChangeType: nil,
-          Identifier: id
+          TransactionChangeType: nil
         }.merge(@receiver_bank_info.to_h)
+
+        puts payload.to_json
+
+        request = Net::HTTP::Post.new(@generate_code_url)
+        request.body = payload.to_json
+        request.basic_auth(@credentials.username, @credentials.password)
+        request['accept'] = 'application/json'
+        request['content-type'] = 'application/json'
+        response = Net::HTTP.start(
+          @generate_code_url.hostname,
+          @generate_code_url.port,
+          use_ssl: true
+        ) { |http| http.request(request) }
+
+        JSON.parse(response.body)
       end
     end
   end
