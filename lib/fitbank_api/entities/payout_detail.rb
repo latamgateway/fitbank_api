@@ -106,7 +106,7 @@ module FitBankApi
       sig { params(response_body: T::Hash[String, T.untyped]).returns(FitBankApi::Entities::PayoutDetail) }
       # Initialize the deails about a payout from the response body
       # returned by the API call.
-      # @param [Hash] response_body The 'Infos' field of the response returned by FitBank API
+      # @param [Hash] response_body The Infos field of the response returned by FitBank API
       # @return [FitBankApi::Entities::PayoutDetail] An object wrapping the detail info
       def self.from_response(response_body)
         sender_bank_info = FitBankApi::Entities::BankInfo.new(
@@ -122,8 +122,8 @@ module FitBankApi
           bank_account_digit: response_body['ToBankAccountDigit']
         )
         FitBankApi::Entities::PayoutDetail.new(
-          sender_bank_info:,
-          receiver_bank_info:,
+          sender_bank_info: sender_bank_info,
+          receiver_bank_info: receiver_bank_info,
           status: FitBankApi::Entities::PayoutDetail::Status.deserialize(response_body['Status']),
           fitbank_payout_id: response_body['DocumentNumber'],
           request_id: response_body['Identifier'],
