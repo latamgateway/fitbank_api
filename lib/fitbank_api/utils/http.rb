@@ -34,9 +34,9 @@ module FitBankApi
 
         response.value
 
-        body = JSON.parse(response.body, symbolize_names: true)
+        body = T.let(JSON.parse(response.body, symbolize_names: true), T::Hash[Symbol, T.untyped])
 
-        raise FitBankApi::Errors::BaseApiError, body if body['Success'] == 'false'
+        raise FitBankApi::Errors::BaseApiError, body if body[:Success] == 'false'
 
         body
       end
