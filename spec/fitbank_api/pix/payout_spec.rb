@@ -1,6 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
+require 'securerandom'
+
 RSpec.describe FitBankApi::Pix::Payout do
   describe 'payout' do
     let!(:sender_bank_info) { build(:bank_info) }
@@ -17,19 +19,23 @@ RSpec.describe FitBankApi::Pix::Payout do
       )
     end
     let!(:credentials) { build(:credentials) }
-    xit 'performs payout' do
-      # TODO: Mock this
-      payout = FitBankApi::Pix::Payout.new(
-        request_id: '123',
-        receiver_bank_info:,
-        sender_bank_info:,
-        credentials:,
-        receiver_name: 'John Doe',
-        receiver_document: '240.223.700-76',
-        value: 50
-      )
-      response = payout.call
-      expect(response['Success']).to eq('true')
+    it 'performs payout' do
+      VCR.use_cassette('pix/payout/manual') do
+        payout = FitBankApi::Pix::Payout.new(
+          request_id: SecureRandom.uuid,
+          receiver_bank_info: receiver_bank_info,
+          sender_bank_info: sender_bank_info,
+          credentials: credentials,
+          receiver_name: 'John Doe',
+          # This tax number is taken from FitBank example. It seems
+          # like other tax numbers are not working in sandbox
+          receiver_document: '17774076050',
+          value: 50
+        )
+        response = payout.call
+        expect(response[:Success]).to eq('true')
+        expect(response).to have_key(:DocumentNumber)
+      end
     end
   end
 end
