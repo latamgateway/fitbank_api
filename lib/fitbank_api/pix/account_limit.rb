@@ -111,13 +111,7 @@ module FitBankApi
           min_value: 0,
           max_value: daily_limit
         )
-        response = post(@limit_setter_url, payload)
-
-        response.value
-
-        body = JSON.parse(response.body)
-
-        raise FitBankApi::Errors::BaseApiError, body if body['Success'] == 'false'
+        FitBankApi::Utils::HTTP.post!(@limit_setter_url, payload, @credentials)
       end
 
       sig { returns(Integer) }
@@ -126,15 +120,8 @@ module FitBankApi
       # @return [Integer] The maximal daily limit
       def daily_amount_limit
         payload = generate_get_limit_payload(type: LimitType::Daily, subtype: LimitSubtype::Amount)
-        response = post(@limit_getter_url, payload)
-
-        response.value
-
-        body = JSON.parse(response.body)
-
-        raise FitBankApi::Errors::BaseApiError, body if body['Success'] == 'false'
-
-        Integer(body['MaxLimit'])
+        response_body = FitBankApi::Utils::HTTP.post!(@limit_getter_url, payload, @credentials)
+        Integer(response_body[:MaxLimit])
       end
 
       private
@@ -145,7 +132,7 @@ module FitBankApi
           subtype: LimitSubtype,
           min_value: Integer,
           max_value: Integer
-        ).returns(T::Hash[String, T.untyped])
+        ).returns(T::Hash[Symbol, T.untyped])
       end
       # There are 3 types of limits. All of them are set via the same API call. A parameter in
       # the payload describes the limit being set. This function generates the whole payload.
@@ -174,7 +161,12 @@ module FitBankApi
         }
       end
 
-      sig { params(type: LimitType, subtype: LimitSubtype).returns(T::Hash[String, T.untyped]) }
+      sig do
+        params(
+          type: LimitType,
+          subtype: LimitSubtype
+        ).returns(T::Hash[Symbol, T.untyped])
+      end
       # There are 3 types of limits. All of them are get via the same API call. A parameter in
       # the payload describes the limit being retrieved. This function generates the whole payload.
       # @param [LimitType] type The type of the limit @see LimitType
@@ -194,19 +186,6 @@ module FitBankApi
           Type: type.to_i,
           SubType: subtype.to_i
         }
-      end
-
-      sig { params(url: URI::Generic, payload: T::Hash[String, T.untyped]).returns(Net::HTTPResponse) }
-      # Make a post request to FitBankApi
-      # @param [URI::Generic] url The endpoint
-      # @param [Hash] payload The body
-      def post(url, payload)
-        request = Net::HTTP::Post.new(url)
-        request.body = payload.to_json
-        request.basic_auth(@credentials.username, @credentials.password)
-        request['accept'] = 'application/json'
-        request['content-type'] = 'application/json'
-        Net::HTTP.start(url.hostname, url.port, use_ssl: true) { |http| http.request(request) }
       end
     end
   end
