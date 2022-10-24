@@ -33,6 +33,7 @@ RSpec.describe FitBankApi::Pix::Payout do
           value: 50
         )
         response = payout.call
+
         expect(response[:Success]).to eq('true')
         expect(response).to have_key(:DocumentNumber)
       end
