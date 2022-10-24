@@ -15,12 +15,12 @@ RSpec.describe FitBankApi::Entities::Credentials do
     context 'attributes' do
       it 'has attr_accessors' do
         credentials = described_class.new(
-          cnpj:,
-          username:,
-          password:,
-          mkt_place_id:,
-          business_unit_id:,
-          partner_id:
+          cnpj: cnpj,
+          username: username,
+          password: password,
+          mkt_place_id: mkt_place_id,
+          business_unit_id: business_unit_id,
+          partner_id: partner_id
         )
 
         expect(credentials).to respond_to(:cnpj)
@@ -42,12 +42,12 @@ RSpec.describe FitBankApi::Entities::Credentials do
     context 'initialization' do
       it 'is initialized with correct values' do
         credentials = described_class.new(
-          cnpj:,
-          username:,
-          password:,
-          mkt_place_id:,
-          business_unit_id:,
-          partner_id:
+          cnpj: cnpj,
+          username: username,
+          password: password,
+          mkt_place_id: mkt_place_id,
+          business_unit_id: business_unit_id,
+          partner_id: partner_id
         )
 
         expect(credentials.cnpj).to eq(CNPJ.new(cnpj).stripped)
