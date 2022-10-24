@@ -28,20 +28,16 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency('builder')
-  spec.add_dependency('bundler')
-  spec.add_dependency('cpf_cnpj', '~> 0.5.0')
-  spec.add_dependency('rake')
-  spec.add_dependency('sorbet-static-and-runtime', '~> 0.5.0')
+  spec.add_dependency('cpf_cnpj')
+  spec.add_dependency('sorbet-runtime')
 
-  spec.add_development_dependency('dotenv', '~> 2.8.0')
-  spec.add_development_dependency('factory_bot', '~> 6.1')
-  spec.add_development_dependency('pry-byebug', '~> 3.9')
-  spec.add_development_dependency('rspec', '~> 3.10')
-  spec.add_development_dependency('webmock', '~> 3.18.0')
-  spec.add_development_dependency('rubocop')
+  spec.add_development_dependency('dotenv')
+  spec.add_development_dependency('factory_bot')
+  spec.add_development_dependency('pry-byebug')
+  spec.add_development_dependency('rspec')
+  spec.add_development_dependency('sorbet-static')
   spec.add_development_dependency('tapioca')
-  spec.add_development_dependency('vcr', '~> 6.0')
+  spec.add_development_dependency('vcr')
+  spec.add_development_dependency('webmock')
   spec.add_development_dependency('yard')
-  # spec.add_development_dependency('uuid', '~> 2.3', '>= 2.3.9')
 end

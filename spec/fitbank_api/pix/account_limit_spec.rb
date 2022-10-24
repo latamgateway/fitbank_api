@@ -12,10 +12,11 @@ RSpec.describe FitBankApi::Pix::AccountLimit do
       # an error stating that the business_unit_id does not match with the CNPJ.
       # A bug was reported at FitBank.
       limit = described_class.new(
-        credentials:,
-        bank_info:,
+        credentials: credentials,
+        bank_info: bank_info,
         base_url: ENV.fetch('FITBANK_BASE_URL')
       )
+
       limit.update_daily_amount_limit(50_000_000)
     end
   end
@@ -27,10 +28,11 @@ RSpec.describe FitBankApi::Pix::AccountLimit do
       # an error stating that the business_unit_id does not match with the CNPJ.
       # A bug was reported at FitBank.
       limit = described_class.new(
-        credentials:,
-        bank_info:,
+        credentials: credentials,
+        bank_info: bank_info,
         base_url: ENV.fetch('FITBANK_BASE_URL')
       )
+
       max_daily_limit = limit.daily_amount_limit
     end
   end

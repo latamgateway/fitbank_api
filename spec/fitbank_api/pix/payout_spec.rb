@@ -6,6 +6,7 @@ require 'securerandom'
 RSpec.describe FitBankApi::Pix::Payout do
   describe 'payout' do
     let!(:sender_bank_info) { build(:bank_info) }
+
     let!(:receiver_bank_info) do
       # This data is taken from an example FitBank sent us and it's working.
       # Different kinds of bank_account_digit can fail (even if they are acceptable to the API),
@@ -18,7 +19,9 @@ RSpec.describe FitBankApi::Pix::Payout do
         bank_account_digit: '5'
       )
     end
+
     let!(:credentials) { build(:credentials) }
+
     it 'performs payout' do
       VCR.use_cassette('pix/payout/manual') do
         payout = FitBankApi::Pix::Payout.new(
@@ -32,6 +35,7 @@ RSpec.describe FitBankApi::Pix::Payout do
           receiver_document: '17774076050',
           value: 50
         )
+
         response = payout.call
 
         expect(response[:Success]).to eq('true')

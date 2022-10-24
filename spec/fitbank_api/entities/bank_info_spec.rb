@@ -10,7 +10,11 @@ RSpec.describe FitBankApi::Entities::BankInfo do
 
     context 'attributes' do
       it 'has attr_accessors' do
-        bank_info = described_class.new(bank_code:, bank_agency:, bank_account:)
+        bank_info = described_class.new(
+          bank_code: bank_code,
+          bank_agency: bank_agency,
+          bank_account: bank_account
+        )
 
         expect(bank_info).to respond_to(:bank_code)
         expect(bank_info).to respond_to(:bank_agency)
@@ -26,7 +30,12 @@ RSpec.describe FitBankApi::Entities::BankInfo do
 
     context 'initialization' do
       it 'is initialized with correct values' do
-        bank_info = described_class.new(bank_code:, bank_agency:, bank_account:, bank_account_digit:)
+        bank_info = described_class.new(
+          bank_code: bank_code,
+          bank_agency: bank_agency,
+          bank_account: bank_account,
+          bank_account_digit: bank_account_digit
+        )
 
         expect(bank_info.bank_code).to eq(bank_code)
         expect(bank_info.bank_agency).to eq(bank_agency)
