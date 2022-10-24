@@ -108,7 +108,7 @@ module FitBankApi
         end
       end
 
-      sig { returns(T::Hash[String, T.untyped]) }
+      sig { returns(T::Hash[Symbol, T.untyped]) }
       # Perform a PIX Payment. For FitBank API documentation check:
       # https://dev.fitbank.com.br/docs/3-payments and https://dev.fitbank.com.br/reference/234
       # Note the first link is high level overview and some parameters are missing. The second
@@ -164,21 +164,9 @@ module FitBankApi
           CustomerMessage: 'Transfer',
           OnlineTransfer: true
         }
+        # TODO: Make this a parameter. It will break the API.
         uri = URI.join(ENV.fetch('FITBANK_BASE_URL'), 'main/execute/GeneratePixOut')
-        request = Net::HTTP::Post.new(uri)
-        request.body = payload.to_json
-        request.basic_auth(@credentials.username, @credentials.password)
-        request['accept'] = 'application/json'
-        request['content-type'] = 'application/json'
-        response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(request) }
-
-        response.value
-
-        body = JSON.parse(response.body)
-
-        raise FitBankApi::Errors::BaseApiError, body if body['Success'] == 'false'
-
-        body
+        FitBankApi::Utils::HTTP.post!(uri, payload, @credentials)
       end
     end
   end
