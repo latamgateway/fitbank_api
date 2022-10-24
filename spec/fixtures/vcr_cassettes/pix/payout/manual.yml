@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GeneratePixOut
+    body:
+      encoding: UTF-8
+      string: '{"Method":"GeneratePixOut","PartnerId":1012,"BusinessUnitId":1526,"TaxNumber":"33630661000150","Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6","ToTaxNumber":"17774076050","ToName":"John
+        Doe","ToBank":"450","ToBankBranch":"0001","ToBankAccount":"182198382","ToBankAccountDigit":"5","AccountType":"0","Value":50,"RateValue":0,"RateValueType":0,"Identifier":"0125ed47-5bf7-49a2-a971-fdb08956f50b","Tags":[],"PaymentDate":"2022/10/18","PixKey":null,"PixKeyType":null,"SearchProtocol":null,"Description":"Transfer","CustomerMessage":"Transfer","OnlineTransfer":true}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Host:
+      - sandboxapi.fitbank.com.br
+      Authorization:
+      - Basic ZmZhNDZjNjMtZTBiNC00ZWEyLWIwMTItMTE0OTlkYmY0YjM3OjI1YjU0NDVjLTk1ZWItNDZjNy1iMDU0LWI2YjMyNTI5YmI2ZQ==
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '200'
+      Connection:
+      - keep-alive
+      Date:
+      - Tue, 18 Oct 2022 12:15:20 GMT
+      Cache-Control:
+      - private
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnetmvc-Version:
+      - '4.0'
+      X-Aspnet-Version:
+      - 4.0.30319
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, AntiForgery, X-Requested-With, AccessToken
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 429f4d0dffb8bf0b68cf2d9d500542f8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - VIE50-P1
+      X-Amz-Cf-Id:
+      - az_ozfKsbXh4eK1lXxo7Pk-vpF6aakvc9dbRvwIOESSSOpwNvyao8A==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJTb2xpY2l0YcOnw6NvIHBhcmEgcGFnYW1lbnRvIFBJWCByZWNlYmlkYSBjb20gc3VjZXNzby4iLCJEb2N1bWVudE51bWJlciI6NTAxMzUzLCJVcmwiOiJodHRwczovL3NhbmRib3hyZWNlaXB0LmZpdGJhbmsuY29tLmJyL3JlY2VpcHQvcGRmP2ZpbGVuYW1lPTIwMjItMTAtMTgvM3BjMXRwcmgucGRmIn0=
+  recorded_at: Tue, 18 Oct 2022 12:15:21 GMT
+recorded_with: VCR 6.1.0
