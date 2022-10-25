@@ -74,7 +74,8 @@ module FitBankApi
           base_url: String,
           receiver_bank_info: FitBankApi::Entities::BankInfo,
           credentials: FitBankApi::Entities::Credentials,
-          receiver_pix_key: String
+          receiver_pix_key: String,
+          receiver_zip_code: String
         ).void
       end
       # @param [String] base_url The base URL of the API, defining whether prod
@@ -131,7 +132,9 @@ module FitBankApi
           BusinessUnitId: @credentials.business_unit_id,
           PixKey: @receiver_pix_key,
           TaxNumber: @credentials.cnpj,
-          PrincipalValue: value,
+          PrincipalValue: value.truncate(2).to_s('F'),
+          # Any other date format will raise an error: "Houve um erro no sistema. Tente novamente mais tarde"
+          # e.g. internal server error.
           ExpirationDate: expiartion_date.strftime('%Y/%m/%d'),
           Identifier: id,
           Address: {
