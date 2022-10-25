@@ -85,10 +85,11 @@ module FitBankApi
       # @param [FitBankApi::Entities::Credentials] credentials Credentials used to
       #   access the API
       # @param [String] pix_key The PIX key of the one receiving the money.
-      # @note The pix_key must be registerd into FitBank's database via:
-      #   https://dev.fitbank.com.br/reference/217
       # @param [String] receiver_zip_code Zip Code of the city where the receiver is situtated.
       #   It is allowed to have a dash in the zip code.
+      # @note For sandbox the pix_key must be registerd into FitBank's database via:
+      #   https://dev.fitbank.com.br/reference/217. For productino we can use already existing
+      #   PIX key.
       def initialize(
         base_url:,
         receiver_bank_info:,
