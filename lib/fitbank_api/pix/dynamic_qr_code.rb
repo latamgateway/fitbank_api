@@ -14,13 +14,13 @@ module FitBankApi
     # This QR code is used to create a payment
     # Documentation:
     # * https://dev.fitbank.com.br/docs/4-receipts-and-collection
-    # * https://dev.fitbank.com.br/reference/255
+    # * https://dev.fitbank.com.br/reference/256
     class DynamicQrCode
       extend T::Sig
 
       # Agent modality of the withdraw transaction, i.e.: withdraw enabler agent,
       # commercial establishment agent or other type of legal entity or correspondent
-      # in the country. By 2, unless it refers to a Pix Withdraw transaction
+      # in the country. By default use 2, unless it refers to a Pix Withdraw transaction
       DEFAULT_AGENT_MODALITY = T.let(2, Integer)
       private_constant :DEFAULT_AGENT_MODALITY
 
@@ -28,6 +28,7 @@ module FitBankApi
         extend T::Sig
 
         enums do
+          # This is the default. Acording to FitBank we should use this
           PurchaseOrTransfer = new
           PurchaseWithChange = new
           Withdraw = new
@@ -85,11 +86,14 @@ module FitBankApi
       # @param [String] pix_key The PIX key of the one receiving the money.
       # @note The pix_key must be registerd into FitBank's database via:
       #   https://dev.fitbank.com.br/reference/217
+      # @param [String] receiver_zip_code Zip Code of the city where the receiver is situtated.
+      #   It is allowed to have a dash in the zip code.
       def initialize(
         base_url:,
         receiver_bank_info:,
         credentials:,
-        receiver_pix_key:
+        receiver_pix_key:,
+        receiver_zip_code:
       )
         @generate_code_url = T.let(
           URI.join(base_url, 'main/execute/GenerateDynamicPixQRCode'), URI::Generic
@@ -97,6 +101,7 @@ module FitBankApi
         @receiver_bank_info = receiver_bank_info
         @credentials = credentials
         @receiver_pix_key = receiver_pix_key
+        @receiver_zip_code = receiver_zip_code
       end
 
       sig do
@@ -110,12 +115,12 @@ module FitBankApi
       # to the receiver_bank_info.
       # @param [BigDecimal] value The amount of the sum transfered when the QR code is scanned
       # @param [Date] expiartion_date The QR code will not be valid after this date
-      # @param [String] id (Optional) Custom identifier for the QR code. You cannot serch by it, nor
+      # @param [String] id Custom identifier for the QR code. You cannot serch by it, nor
       #   use it for retries. You can, however, see it when you query the API for the QR code info.
       def generate(
         value:,
         expiartion_date:,
-        id: ''
+        id:
       )
         # Endpoint documentation: https://dev.fitbank.com.br/reference/256
         # Fields which are not required are ommited for now
@@ -124,53 +129,32 @@ module FitBankApi
           Method: 'GenerateDynamicPixQRCode',
           PartnerId: @credentials.partner_id,
           BusinessUnitId: @credentials.business_unit_id,
-          PixKey: @credentials.cnpj,
+          PixKey: @receiver_pix_key,
           TaxNumber: @credentials.cnpj,
-          PayerTaxNumber: '65023491021',
-          PayerName: 'João da Silva Pereira',
-          PrincipalValue: 100,
-          ExpirationDate: '31/01/2023',
+          PrincipalValue: value,
+          ExpirationDate: expiartion_date.strftime('%Y/%m/%d'),
+          Identifier: id,
           Address: {
-            AddressLine: 'Rua Niterói',
-            AddressLine2: 'string',
-            ZipCode: '60731-305',
-            Neighborhood: 'Canindezinho',
-            CityCode: '451',
-            CityName: 'Fortaleza',
-            State: 'Ceará',
-            AddressType: 1,
-            Country: 'Brasil',
-            Complement: 'Apto 01',
-            Reference: 'Próximo ao mercado'
+            # The address and the fields in it are optional accordnig to the docs. There
+            # are the following bugs:
+            # * If the address is missing this error message is returned:
+            #   "O campo CityName não pode ser nulo." e.g. the city name should not be empty
+            # * If the zip code is missing the same message appeasr (O campo CityName não pode ser nulo.)
+            #   CityName does not matter it can be passed or not and the request will be valid.
+            ZipCode: @receiver_zip_code
           },
+          # Can the request pointed by the QR code be changed after the code
+          # is generated
           ChangeType: ChangeType::None.to_i,
-          AdditionalData: [
-            {
-              Name: 'pagamento',
-              Value: '300'
-            }
-          ],
-          PayerRequest: 'pagamento',
-          TransactionPurpose: TransactionPurpose::Withdraw.to_i,
-          TransactionValue: nil,
+          TransactionPurpose: TransactionPurpose::PurchaseOrTransfer.to_i,
           AgentModality: DEFAULT_AGENT_MODALITY,
+          # (TransactionValue, TransactionChangeType) are aplicable only
+          # if TransactionPurpose = TransactionPurpose::Withdraw
+          TransactionValue: nil,
           TransactionChangeType: nil
         }.merge(@receiver_bank_info.to_h)
 
-        puts payload.to_json
-
-        request = Net::HTTP::Post.new(@generate_code_url)
-        request.body = payload.to_json
-        request.basic_auth(@credentials.username, @credentials.password)
-        request['accept'] = 'application/json'
-        request['content-type'] = 'application/json'
-        response = Net::HTTP.start(
-          @generate_code_url.hostname,
-          @generate_code_url.port,
-          use_ssl: true
-        ) { |http| http.request(request) }
-
-        JSON.parse(response.body)
+        FitBankApi::Utils::HTTP.post!(@generate_code_url, payload, @credentials)
       end
     end
   end
