@@ -134,7 +134,7 @@ module FitBankApi
           TaxNumber: @credentials.cnpj,
           PrincipalValue: value.truncate(2).to_s('F'),
           # Any other date format will raise an error: "Houve um erro no sistema. Tente novamente mais tarde"
-          # e.g. internal server error.
+          # i.e. internal server error.
           ExpirationDate: expiartion_date.strftime('%Y/%m/%d'),
           Identifier: id,
           Address: {
