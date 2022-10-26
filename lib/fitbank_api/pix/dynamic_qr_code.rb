@@ -100,6 +100,9 @@ module FitBankApi
         @generate_code_url = T.let(
           URI.join(base_url, 'main/execute/GenerateDynamicPixQRCode'), URI::Generic
         )
+        @get_code_by_id_url = T.let(
+          URI.join(base_url, 'main/execute/GetPixQRCodeById'), URI::Generic
+        )
         @receiver_bank_info = receiver_bank_info
         @credentials = credentials
         @receiver_pix_key = receiver_pix_key
@@ -159,6 +162,22 @@ module FitBankApi
         }.merge(@receiver_bank_info.to_h)
 
         FitBankApi::Utils::HTTP.post!(@generate_code_url, payload, @credentials)
+      end
+
+      sig { params(id: String).returns(T::Hash[Symbol, T.untyped]) }
+      # Retrieve the base64 encoded QRCode image
+      # @param [String] id The DocumentNumber returned by the API when the QR code
+      #   was generated
+      def find_by_id(id)
+        payload = {
+          Method: 'GetPixQRCodeById',
+          PartnerId: @credentials.partner_id,
+          BusinessUnitId: @credentials.business_unit_id,
+          DocumentNumber: id,
+          TaxNumber: @credentials.cnpj
+        }
+
+        FitBankApi::Utils::HTTP.post!(@get_code_by_id_url, payload, @credentials)
       end
     end
   end

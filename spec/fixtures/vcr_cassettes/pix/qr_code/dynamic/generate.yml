@@ -5,7 +5,7 @@ http_interactions:
     uri: https://sandboxapi.fitbank.com.br/main/execute/GenerateDynamicPixQRCode
     body:
       encoding: UTF-8
-      string: '{"Method":"GenerateDynamicPixQRCode","PartnerId":1012,"BusinessUnitId":1526,"PixKey":"33630661000150","TaxNumber":"33630661000150","PrincipalValue":"20.0","ExpirationDate":"2022/10/26","Identifier":"104c857d-03a2-4874-a186-62c5c2a93427","Address":{"ZipCode":"87010430"},"ChangeType":0,"TransactionPurpose":0,"AgentModality":2,"TransactionValue":null,"TransactionChangeType":null,"Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}'
+      string: '{"Method":"GenerateDynamicPixQRCode","PartnerId":1012,"BusinessUnitId":1526,"PixKey":"33630661000150","TaxNumber":"33630661000150","PrincipalValue":"20.0","ExpirationDate":"2022/11/25","Identifier":"588cd47f-2215-4feb-91c2-09dbbc955b8b","Address":{"ZipCode":"87010430"},"ChangeType":0,"TransactionPurpose":0,"AgentModality":2,"TransactionValue":null,"TransactionChangeType":null,"Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -31,7 +31,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Tue, 25 Oct 2022 09:41:58 GMT
+      - Wed, 26 Oct 2022 16:31:42 GMT
       Cache-Control:
       - private
       Server:
@@ -47,14 +47,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 5cc4b35b46cb9b55d49e7f47442e6838.cloudfront.net (CloudFront)
+      - 1.1 b422a73bd4365ba0f138cecf31d97ec2.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - MUC50-P1
+      - SOF50-C1
       X-Amz-Cf-Id:
-      - 6RK4hTuf0I4poODutTJOqNkaXHQfg1svMj3jMjtGsZCZUNSFqQlkjw==
+      - 5-eWWjywrI-SqiG1gAyc_KGR_F-yRTsoayG6TaHwwMSYa50gZb7UfQ==
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJEb2N1bWVudE51bWJlciI6MTAxMjF9
-  recorded_at: Tue, 25 Oct 2022 09:41:58 GMT
+        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJEb2N1bWVudE51bWJlciI6MTAyNTB9
+  recorded_at: Wed, 26 Oct 2022 16:31:42 GMT
 recorded_with: VCR 6.1.0
