@@ -18,7 +18,7 @@ RSpec.describe FitBankApi::Pix::DynamicQrCode do
           receiver_bank_info: latam_bank_info,
           receiver_pix_key: credentials.cnpj,
           credentials: credentials,
-          receiver_zip_code: '87010430'
+          receiver_zip_code: ENV.fetch('LATAM_ZIP_CODE')
         )
 
         @generate_response = @qr_code_manager.generate(
