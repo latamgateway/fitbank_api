@@ -19,7 +19,7 @@ module FitBankApi
       attr_reader :status
 
       sig { returns(String) }
-      attr_reader :request_id, :fitbank_payout_id, :end_to_end_id, :receipt_url
+      attr_reader :request_id, :fitbank_payout_id, :end_to_end_id, :receipt_url, :receiver_document
 
       sig { returns(BigDecimal) }
       attr_reader :rate_value, :total_value
@@ -62,7 +62,8 @@ module FitBankApi
           rate_value: BigDecimal,
           total_value: BigDecimal,
           receipt_url: String,
-          end_to_end_id: String
+          end_to_end_id: String,
+          receiver_document: String
         ).void
       end
       # Create PayoutDetail for FitBank PIX Payout
@@ -79,6 +80,7 @@ module FitBankApi
       # @param [String] receipt_url Link to a document proovnig the payment went through
       # @param [String] end_to_end_id Used by the central bank of brazil to identify the transaction
       #   @todo Check with FitBank the meaning of this.
+      # @param [String] receiver_document The CPF/CNPJ of the receiver of the money
       def initialize(
         sender_bank_info:,
         receiver_bank_info:,
@@ -89,7 +91,8 @@ module FitBankApi
         rate_value:,
         total_value:,
         receipt_url:,
-        end_to_end_id:
+        end_to_end_id:,
+        receiver_document:
       )
         @sender_bank_info = sender_bank_info
         @receiver_bank_info = receiver_bank_info
@@ -101,37 +104,41 @@ module FitBankApi
         @total_value = total_value
         @receipt_url = receipt_url
         @end_to_end_id = end_to_end_id
+        @receiver_document = receiver_document
       end
 
-      sig { params(response_body: T::Hash[String, T.untyped]).returns(FitBankApi::Entities::PayoutDetail) }
+      sig { params(response_body: T::Hash[Symbol, T.untyped]).returns(FitBankApi::Entities::PayoutDetail) }
       # Initialize the deails about a payout from the response body
       # returned by the API call.
       # @param [Hash] response_body The Infos field of the response returned by FitBank API
       # @return [FitBankApi::Entities::PayoutDetail] An object wrapping the detail info
       def self.from_response(response_body)
         sender_bank_info = FitBankApi::Entities::BankInfo.new(
-          bank_code: response_body['FromBankCode'],
-          bank_agency: response_body['FromBankBranch'],
-          bank_account: response_body['FromBankAccount'],
-          bank_account_digit: response_body['FromBankAccountDigit']
+          bank_code: response_body[:FromBankCode],
+          bank_agency: response_body[:FromBankBranch],
+          bank_account: response_body[:FromBankAccount],
+          bank_account_digit: response_body[:FromBankAccountDigit]
         )
+
         receiver_bank_info = FitBankApi::Entities::BankInfo.new(
-          bank_code: response_body['ToBankCode'],
-          bank_agency: response_body['ToBankBranch'],
-          bank_account: response_body['ToBankAccount'],
-          bank_account_digit: response_body['ToBankAccountDigit']
+          bank_code: response_body[:ToBankCode],
+          bank_agency: response_body[:ToBankBranch],
+          bank_account: response_body[:ToBankAccount],
+          bank_account_digit: response_body[:ToBankAccountDigit]
         )
+
         FitBankApi::Entities::PayoutDetail.new(
           sender_bank_info: sender_bank_info,
           receiver_bank_info: receiver_bank_info,
-          status: FitBankApi::Entities::PayoutDetail::Status.deserialize(response_body['Status']),
-          fitbank_payout_id: response_body['DocumentNumber'],
-          request_id: response_body['Identifier'],
-          payment_date: DateTime.parse(response_body['PaymentDate']),
-          rate_value: BigDecimal(response_body['RateValue']),
-          total_value: BigDecimal(response_body['TotalValue']),
-          receipt_url: response_body['ReceiptUrl'],
-          end_to_end_id: response_body['EndToEndId']
+          status: FitBankApi::Entities::PayoutDetail::Status.deserialize(response_body[:Status]),
+          fitbank_payout_id: response_body[:DocumentNumber],
+          request_id: response_body[:Identifier],
+          payment_date: DateTime.parse(response_body[:PaymentDate]),
+          rate_value: BigDecimal(response_body[:RateValue]),
+          total_value: BigDecimal(response_body[:TotalValue]),
+          receipt_url: response_body[:ReceiptUrl],
+          end_to_end_id: response_body[:EndToEndId],
+          receiver_document: response_body[:ToTaxNumber]
         )
       end
     end
