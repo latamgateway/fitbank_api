@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GenerateDynamicPixQRCode
+    body:
+      encoding: UTF-8
+      string: '{"Method":"GenerateDynamicPixQRCode","PartnerId":1012,"BusinessUnitId":1526,"PixKey":"33630661000150","TaxNumber":"33630661000150","PrincipalValue":"20.0","ExpirationDate":"2022/11/25","Identifier":"588cd47f-2215-4feb-91c2-09dbbc955b8b","Address":{"ZipCode":"87010430"},"ChangeType":0,"TransactionPurpose":0,"AgentModality":2,"TransactionValue":null,"TransactionChangeType":null,"Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Host:
+      - sandboxapi.fitbank.com.br
+      Authorization:
+      - Basic ZmZhNDZjNjMtZTBiNC00ZWEyLWIwMTItMTE0OTlkYmY0YjM3OjI1YjU0NDVjLTk1ZWItNDZjNy1iMDU0LWI2YjMyNTI5YmI2ZQ==
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '93'
+      Connection:
+      - keep-alive
+      Date:
+      - Wed, 26 Oct 2022 16:31:42 GMT
+      Cache-Control:
+      - private
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnetmvc-Version:
+      - '4.0'
+      X-Aspnet-Version:
+      - 4.0.30319
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, AntiForgery, X-Requested-With, AccessToken
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 b422a73bd4365ba0f138cecf31d97ec2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SOF50-C1
+      X-Amz-Cf-Id:
+      - 5-eWWjywrI-SqiG1gAyc_KGR_F-yRTsoayG6TaHwwMSYa50gZb7UfQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJEb2N1bWVudE51bWJlciI6MTAyNTB9
+  recorded_at: Wed, 26 Oct 2022 16:31:42 GMT
+recorded_with: VCR 6.1.0
