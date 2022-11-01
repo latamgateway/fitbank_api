@@ -120,8 +120,8 @@ module FitBankApi
       # to the receiver_bank_info.
       # @param [BigDecimal] value The amount of the sum transfered when the QR code is scanned
       # @param [Date] expiartion_date The QR code will not be valid after this date
-      # @param [String] id Custom identifier for the QR code. You cannot serch by it, nor
-      #   use it for retries. You can, however, see it when you query the API for the QR code info.
+      # @param [String] id Custom identifier for the QR code. You cannot serch by it, but it
+      #   it can be used for retries, since the API will return an error if you use the same code twice.
       def generate(
         value:,
         expiartion_date:,
@@ -136,7 +136,7 @@ module FitBankApi
           BusinessUnitId: @credentials.business_unit_id,
           PixKey: @receiver_pix_key,
           TaxNumber: @credentials.cnpj,
-          PrincipalValue: value.truncate(2).to_s('F'),
+          PrincipalValue: value.to_s('F'),
           # Any other date format will raise an error: "Houve um erro no sistema. Tente novamente mais tarde"
           # i.e. internal server error.
           ExpirationDate: expiartion_date.strftime('%Y/%m/%d'),
