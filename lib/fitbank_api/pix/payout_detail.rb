@@ -46,21 +46,12 @@ module FitBankApi
           PartnerId: @credentials.partner_id,
           BusinessUnitId: @credentials.business_unit_id,
           TaxNumber: @credentials.cnpj,
-          DocumentNumber: fitbank_payout_id,
-          Bank: @bank_info.bank_code,
-          BankBranch: @bank_info.bank_agency,
-          BankAccount: @bank_info.bank_account,
-          BankAccountDigit: @bank_info.bank_account_digit
-        }
-        response = post(@get_by_id_url, payload)
+          DocumentNumber: fitbank_payout_id
+        }.merge(@bank_info)
 
-        response.value
+        response = FitBankApi::Utils::HTTP.post!(@get_by_id_url, payload, @credentials)
 
-        body = JSON.parse(response.body)
-
-        raise FitBankApi::Errors::BaseApiError, body if body['Success'] == 'false'
-
-        FitBankApi::Entities::PayoutDetail.from_response(body['Infos'])
+        FitBankApi::Entities::PayoutDetail.from_response(response[:Infos])
       end
 
       sig do
@@ -84,44 +75,18 @@ module FitBankApi
           PartnerId: @credentials.partner_id,
           BusinessUnitId: @credentials.business_unit_id,
           TaxNumber: @credentials.cnpj,
-          Bank: @bank_info.bank_code,
-          BankBranch: @bank_info.bank_agency,
-          BankAccount: @bank_info.bank_account,
-          BankAccountDigit: @bank_info.bank_account_digit,
           StartDate: start_date.strftime('%Y/%m/%d'),
           EndDate: end_date.strftime('%Y/%m/%d'),
           PageIndex: page_index,
           PageSize: GET_BY_DATE_PAGE_SIZE
-        }
-        response = post(@get_by_id_url, payload)
+        }.merge(@bank_info)
 
-        response.value
-
-        body = JSON.parse(response.body)
-
-        raise FitBankApi::Errors::BaseApiError, body if body['Success'] == 'false'
+        FitBankApi::Utils::HTTP.post!(@get_by_date, payload, @credentials)
 
         # The API is not working at the moment. The response format in the docs was wrong for
         # GetById endpoint so I believe it'll be wrong for this as well. We need to wait for the
         # API to get fixed.
         []
-      end
-
-      private
-
-      sig { params(url: URI::Generic, payload: T::Hash[String, T.untyped]).returns(Net::HTTPResponse) }
-      # Make a post request to FitBankApi
-      # @todo Code duplication. Extract this so that all classes can use the post function.
-      # @param [URI::Generic] url The endpoint
-      # @param [Hash] payload The body
-      # @return [Net::HTTPResponse]
-      def post(url, payload)
-        request = Net::HTTP::Post.new(url)
-        request.body = payload.to_json
-        request.basic_auth(@credentials.username, @credentials.password)
-        request['accept'] = 'application/json'
-        request['content-type'] = 'application/json'
-        Net::HTTP.start(url.hostname, url.port, use_ssl: true) { |http| http.request(request) }
       end
     end
   end
