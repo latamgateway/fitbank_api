@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Wrapper classes for the FitBank REST API'
   spec.description   = 'Contains classes which can be used to perform PIX payments using the FitBank REST API'
   spec.homepage      = 'https://github.com/latamgateway/fitbank_api'
-  spec.required_ruby_version = '~> 2.7.6'
+  spec.required_ruby_version = '>= 2.7.2'
 
   spec.license = 'MIT'
 
