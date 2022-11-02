@@ -25,6 +25,7 @@ RSpec.describe FitBankApi::Pix::Payout do
     it 'performs payout' do
       VCR.use_cassette('pix/payout/manual') do
         payout = FitBankApi::Pix::Payout.new(
+          base_url: ENV.fetch('FITBANK_BASE_URL'),
           request_id: SecureRandom.uuid,
           receiver_bank_info: receiver_bank_info,
           sender_bank_info: sender_bank_info,
@@ -33,7 +34,7 @@ RSpec.describe FitBankApi::Pix::Payout do
           # This tax number is taken from FitBank example. It seems
           # like other tax numbers are not working in sandbox
           receiver_document: '17774076050',
-          value: 50
+          value: BigDecimal('50')
         )
 
         response = payout.call
