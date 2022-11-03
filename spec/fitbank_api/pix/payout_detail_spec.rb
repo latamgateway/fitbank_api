@@ -5,9 +5,9 @@ require 'securerandom'
 
 RSpec.describe FitBankApi::Pix::PayoutDetail do
   describe 'payout' do
-    it 'can get payout detail' do
-      payout = build(:manual_payout)
+    let!(:payout) { build(:manual_payout) }
 
+    it 'can get payout detail' do
       VCR.use_cassette('pix/payout_detail/manual_payout') do
         response = payout.call
         expect(response[:Success]).to eq('true')
