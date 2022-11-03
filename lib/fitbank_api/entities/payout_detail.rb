@@ -130,12 +130,12 @@ module FitBankApi
         FitBankApi::Entities::PayoutDetail.new(
           sender_bank_info: sender_bank_info,
           receiver_bank_info: receiver_bank_info,
-          status: FitBankApi::Entities::PayoutDetail::Status.deserialize(response_body[:Status]),
-          fitbank_payout_id: response_body[:DocumentNumber],
+          status: FitBankApi::Entities::PayoutDetail::Status.deserialize(response_body[:Status].downcase),
+          fitbank_payout_id: response_body[:DocumentNumber].to_s,
           request_id: response_body[:Identifier],
           payment_date: DateTime.parse(response_body[:PaymentDate]),
-          rate_value: BigDecimal(response_body[:RateValue]),
-          total_value: BigDecimal(response_body[:TotalValue]),
+          rate_value: response_body[:RateValue].to_d,
+          total_value: response_body[:TotalValue].to_d,
           receipt_url: response_body[:ReceiptUrl],
           end_to_end_id: response_body[:EndToEndId],
           receiver_document: response_body[:ToTaxNumber]

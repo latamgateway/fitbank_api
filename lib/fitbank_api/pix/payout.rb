@@ -14,6 +14,15 @@ module FitBankApi
     class Payout
       extend T::Sig
 
+      sig { returns(FitBankApi::Entities::BankInfo) }
+      attr_reader :sender_bank_info, :receiver_bank_info
+
+      sig { returns(String) }
+      attr_reader :request_id, :receiver_name, :receiver_document
+
+      sig { returns(BigDecimal) }
+      attr_reader :value
+
       # All payment types supported for PixOut
       # @note Although the docs state that the value for manual Pix must be 0
       #   this is not true. For manual payment we must pass PixKeyType and

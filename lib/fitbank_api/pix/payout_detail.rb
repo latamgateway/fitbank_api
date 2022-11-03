@@ -32,7 +32,7 @@ module FitBankApi
       def initialize(base_url:, credentials:, bank_info:)
         @credentials = credentials
         @get_by_id_url = T.let(URI.join(base_url, 'main/execute/GetPixOutById'), URI::Generic)
-        @get_date_url = T.let(URI.join(base_url, 'main/execute/GetPixOutById'), URI::Generic)
+        @get_by_date_url = T.let(URI.join(base_url, 'main/execute/GetPixOutById'), URI::Generic)
         @bank_info = bank_info
       end
 
@@ -47,7 +47,7 @@ module FitBankApi
           BusinessUnitId: @credentials.business_unit_id,
           TaxNumber: @credentials.cnpj,
           DocumentNumber: fitbank_payout_id
-        }.merge(@bank_info)
+        }.merge(@bank_info.to_h)
 
         response = FitBankApi::Utils::HTTP.post!(@get_by_id_url, payload, @credentials)
 
@@ -79,9 +79,9 @@ module FitBankApi
           EndDate: end_date.strftime('%Y/%m/%d'),
           PageIndex: page_index,
           PageSize: GET_BY_DATE_PAGE_SIZE
-        }.merge(@bank_info)
+        }.merge(@bank_info.to_h)
 
-        FitBankApi::Utils::HTTP.post!(@get_by_date, payload, @credentials)
+        FitBankApi::Utils::HTTP.post!(@get_by_date_url, payload, @credentials)
 
         # The API is not working at the moment. The response format in the docs was wrong for
         # GetById endpoint so I believe it'll be wrong for this as well. We need to wait for the
