@@ -62,8 +62,8 @@ module FitBankApi
         ).returns(T::Array[FitBankApi::Entities::PayoutDetail])
       end
       # Make an API call to find all payouts in the passed time interval (inclusive)
-      # @param [DateTime] start_date Find payouts created from this date
-      # @param [DateTime] end_date Find payout created before this date
+      # @param [Date] start_date Find payouts created from this date
+      # @param [Date] end_date Find payout created before this date
       # @param [Integer] page_index The API returns the data in pages and each page must be requested via
       #   separate API call.
       # @note The API is not working at the moment (07/10/2022). The bug is reported to FitBank.

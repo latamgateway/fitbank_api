@@ -164,7 +164,7 @@ module FitBankApi
           # Optional
           Tags: [],
           # The date can be used to perform delayed payments. We pass the current
-          PaymentDate: DateTime.now.strftime('%Y/%m/%d'),
+          PaymentDate: Date.today.strftime('%Y/%m/%d'),
           # According to the docs for manual PIX PixKey must be empty string and PixKeyType must be 4
           # This is WRONG. FitBank confirmed via chat, that if we want manual PIX we need to set
           # PixKey=null, PixKeyType=null and SearchProtocol=null. For manual PIX the Description
