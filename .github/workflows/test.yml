@@ -9,5 +9,18 @@ on:
 
 jobs:
   test:
+    runs-on: ubuntu-latest
     environment: test
-    uses: latamgateway/ruby-linters-latam/.github/workflows/rspec.yml@0.1.0
+    strategy:
+      matrix:
+        ruby-version: ['2.7.6']
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+
+      - name: Run RSpec
+        run: bundle exec rspec
