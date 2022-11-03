@@ -28,22 +28,22 @@ jobs:
           FITBANK_KEY: ${{secrets.FITBANK_KEY}}
           FITBANK_SECRET: ${{secrets.FITBANK_SECRET}}
 
-    type-check:
-      runs-on: ubuntu-latest
-      environment: test
-      strategy:
-        matrix:
-          ruby-version: ['2.7.6']
-      steps:
-        - uses: actions/checkout@v3
+  type-check:
+    runs-on: ubuntu-latest
+    environment: test
+    strategy:
+      matrix:
+        ruby-version: ['2.7.6']
+    steps:
+      - uses: actions/checkout@v3
 
-        - uses: ruby/setup-ruby@v1
-          with:
-            ruby-version: ${{ matrix.ruby-version }}
-            bundler-cache: true
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
 
-        - name: Generate types for gems
-          run: tapioca init
+      - name: Generate types for gems
+        run: tapioca init
 
-        - name: Check Types
-          run: srb tc
+      - name: Check Types
+        run: srb tc
