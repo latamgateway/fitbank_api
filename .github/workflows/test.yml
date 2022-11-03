@@ -9,4 +9,4 @@ on:
 
 jobs:
   test:
-    uses: latamgateway/ruby-linters-latam/blob/main/.github/workflows/rspec.yml@cb3d2bd
+    uses: latamgateway/ruby-linters-latam/.github/workflows/rspec.yml@0.1.0
