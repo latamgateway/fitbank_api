@@ -36,6 +36,14 @@ module FitBankApi
           BankAccountDigit: @bank_account_digit
         }
       end
+
+      sig { params(other: FitBankApi::Entities::BankInfo).returns(T::Boolean) }
+      def ==(other)
+        @bank_code == other.bank_code \
+          && @bank_agency == other.bank_agency \
+          && @bank_account == other.bank_account \
+          && @bank_account_digit == other.bank_account_digit
+      end
     end
   end
 end
