@@ -43,7 +43,7 @@ jobs:
           bundler-cache: true
 
       - name: Generate types for gems
-        run: tapioca init
+        run: bundle exec tapioca init
 
       - name: Check Types
-        run: srb tc
+        run: bundle exec srb tc
