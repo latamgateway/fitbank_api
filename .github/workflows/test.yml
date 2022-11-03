@@ -8,6 +8,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  environment: test
   test:
+    environment: test
     uses: latamgateway/ruby-linters-latam/.github/workflows/rspec.yml@0.1.0
