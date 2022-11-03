@@ -29,6 +29,7 @@ RSpec.describe FitBankApi::Pix::PayoutDetail do
         expect(payout_detail.end_to_end_id).not_to be_blank
         expect(payout_detail.receipt_url).not_to be_blank
         expect(payout_detail.receiver_document).to eq(payout.receiver_document)
+        expect(payout_detail.receiver_name).to eq(payout.receiver_name)
         expect(payout_detail.total_value).to eq(payout.value)
       end
     end

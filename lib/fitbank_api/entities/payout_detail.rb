@@ -19,7 +19,7 @@ module FitBankApi
       attr_reader :status
 
       sig { returns(String) }
-      attr_reader :request_id, :fitbank_payout_id, :end_to_end_id, :receipt_url, :receiver_document
+      attr_reader :request_id, :fitbank_payout_id, :end_to_end_id, :receipt_url, :receiver_document, :receiver_name
 
       sig { returns(BigDecimal) }
       attr_reader :rate_value, :total_value
@@ -63,7 +63,8 @@ module FitBankApi
           total_value: BigDecimal,
           receipt_url: String,
           end_to_end_id: String,
-          receiver_document: String
+          receiver_document: String,
+          receiver_name: String
         ).void
       end
       # Create PayoutDetail for FitBank PIX Payout
@@ -81,6 +82,7 @@ module FitBankApi
       # @param [String] end_to_end_id Used by the central bank of brazil to identify the transaction
       #   @todo Check with FitBank the meaning of this.
       # @param [String] receiver_document The CPF/CNPJ of the receiver of the money
+      # @param [String] receiver_name The name of the one receiving the money
       def initialize(
         sender_bank_info:,
         receiver_bank_info:,
@@ -92,7 +94,8 @@ module FitBankApi
         total_value:,
         receipt_url:,
         end_to_end_id:,
-        receiver_document:
+        receiver_document:,
+        receiver_name:
       )
         @sender_bank_info = sender_bank_info
         @receiver_bank_info = receiver_bank_info
@@ -105,6 +108,7 @@ module FitBankApi
         @receipt_url = receipt_url
         @end_to_end_id = end_to_end_id
         @receiver_document = receiver_document
+        @receiver_name = receiver_name
       end
 
       sig { params(response_body: T::Hash[Symbol, T.untyped]).returns(FitBankApi::Entities::PayoutDetail) }
@@ -138,7 +142,8 @@ module FitBankApi
           total_value: response_body[:TotalValue].to_d,
           receipt_url: response_body[:ReceiptUrl],
           end_to_end_id: response_body[:EndToEndId],
-          receiver_document: response_body[:ToTaxNumber]
+          receiver_document: response_body[:ToTaxNumber],
+          receiver_name: response_body[:ToName]
         )
       end
     end
