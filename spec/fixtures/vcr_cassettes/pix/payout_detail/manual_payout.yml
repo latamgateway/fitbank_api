@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GeneratePixOut
+    body:
+      encoding: UTF-8
+      string: '{"Method":"GeneratePixOut","PartnerId":1012,"BusinessUnitId":1526,"TaxNumber":"33630661000150","ToTaxNumber":"17774076050","ToName":"John
+        Doe","ToBank":"450","ToBankBranch":"0001","ToBankAccount":"182198382","ToBankAccountDigit":"5","AccountType":"0","Value":"50.0","RateValue":0,"RateValueType":0,"Identifier":"a8d7196c-c2c2-4942-9228-1dda0baea2cb","Tags":[],"PaymentDate":"2022/11/07","PixKey":null,"PixKeyType":null,"SearchProtocol":null,"Description":"Transfer","CustomerMessage":"Transfer","OnlineTransfer":true,"Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Host:
+      - sandboxapi.fitbank.com.br
+      Authorization:
+      - "<AUTH>"
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '200'
+      Connection:
+      - keep-alive
+      Date:
+      - Mon, 07 Nov 2022 12:19:35 GMT
+      Cache-Control:
+      - private
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnetmvc-Version:
+      - '4.0'
+      X-Aspnet-Version:
+      - 4.0.30319
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, AntiForgery, X-Requested-With, AccessToken
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 737cc0360b2df6a9db7576a460128378.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SOF50-C1
+      X-Amz-Cf-Id:
+      - LlyuCa9D-GC2RMxDMuPrBmX_qOJLwJgH_tIpNP4NPCIDOg9VM5LPnA==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJTb2xpY2l0YcOnw6NvIHBhcmEgcGFnYW1lbnRvIFBJWCByZWNlYmlkYSBjb20gc3VjZXNzby4iLCJEb2N1bWVudE51bWJlciI6NTAyMDU5LCJVcmwiOiJodHRwczovL3NhbmRib3hyZWNlaXB0LmZpdGJhbmsuY29tLmJyL3JlY2VpcHQvcGRmP2ZpbGVuYW1lPTIwMjItMTEtMDcvYzFleWw1a2sucGRmIn0=
+  recorded_at: Mon, 07 Nov 2022 12:19:35 GMT
+recorded_with: VCR 6.1.0
