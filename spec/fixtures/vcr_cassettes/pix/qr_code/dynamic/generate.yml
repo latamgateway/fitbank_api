@@ -5,7 +5,8 @@ http_interactions:
     uri: https://sandboxapi.fitbank.com.br/main/execute/GenerateDynamicPixQRCode
     body:
       encoding: UTF-8
-      string: '{"Method":"GenerateDynamicPixQRCode","PartnerId":1012,"BusinessUnitId":1526,"PixKey":"33630661000150","TaxNumber":"33630661000150","PrincipalValue":"20.0","ExpirationDate":"2022/12/07","Identifier":"c33fc872-8659-48bb-ad7e-d35db4a64265","Address":{"ZipCode":"87010430"},"ChangeType":0,"TransactionPurpose":0,"AgentModality":2,"TransactionValue":null,"TransactionChangeType":null,"Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}'
+      string: '{"Method":"GenerateDynamicPixQRCode","PartnerId":1012,"BusinessUnitId":1526,"PixKey":"33630661000150","TaxNumber":"33630661000150","PrincipalValue":"20.0","ExpirationDate":"2022/12/28","Identifier":"3cc507c9-6bbb-4927-91e3-ac90dfc4763f","Address":{"ZipCode":"87010430"},"ChangeType":0,"TransactionPurpose":0,"AgentModality":2,"TransactionValue":null,"TransactionChangeType":null,"PayerName":"Amarillys
+        Félix","PayerTaxNumber":"17774076050","Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -31,7 +32,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Mon, 07 Nov 2022 12:19:33 GMT
+      - Mon, 28 Nov 2022 16:27:41 GMT
       Cache-Control:
       - private
       Server:
@@ -47,14 +48,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 17bed89dd77d46d0468ee87c1955e450.cloudfront.net (CloudFront)
+      - 1.1 db06bf8d1de11ce1e98664ab021137c0.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - SOF50-C1
       X-Amz-Cf-Id:
-      - V0rZT2-_RSHggSssdyzcij5qgSQuboI3VK-OWQMfpfBrwTMSYpDO0w==
+      - dbOo3KyGIloPqMnJQlTJBlMi9dgil01r9RC1jhJchR9DknWsYPMHOQ==
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJEb2N1bWVudE51bWJlciI6MTA3NDF9
-  recorded_at: Mon, 07 Nov 2022 12:19:33 GMT
+        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJEb2N1bWVudE51bWJlciI6MTI5NTN9
+  recorded_at: Mon, 28 Nov 2022 16:27:41 GMT
 recorded_with: VCR 6.1.0

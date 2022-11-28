@@ -7,7 +7,10 @@ module FitBankApi
     class BaseApiError < StandardError
       extend T::Sig
 
-      sig { params(body: T::Hash[String, T.untyped]).void }
+      sig { returns(T::Hash[Symbol, T.untyped]) }
+      attr_reader :body
+
+      sig { params(body: T::Hash[Symbol, T.untyped]).void }
       # Wrap an error returned by FitBank API. All API calls to the bank respond with
       # 200 OK. The way to check if there is an error is to check the 'Success' field of
       # the body. The body has a 'Message' field describing the general reason for the failure.
@@ -24,8 +27,8 @@ module FitBankApi
       #   missing that's why we need to be careful.
       # @param body [Hash] The body of the response from FitBank
       def initialize(body)
-        super(body.fetch('Message', 'Unknown FitBank error'))
-        @validation_errors = T.let(body.fetch('Validation', []), T::Array[T::Hash[String, T::Array[String]]])
+        super(body.fetch(:Message, 'Unknown FitBank error'))
+        @body = body
       end
     end
   end

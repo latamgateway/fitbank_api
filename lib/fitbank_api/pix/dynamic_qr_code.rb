@@ -75,7 +75,9 @@ module FitBankApi
           receiver_bank_info: FitBankApi::Entities::BankInfo,
           credentials: FitBankApi::Entities::Credentials,
           receiver_pix_key: String,
-          receiver_zip_code: String
+          receiver_zip_code: String,
+          payer_name: String,
+          payer_tax_number: String
         ).void
       end
       # @param [String] base_url The base URL of the API, defining whether prod
@@ -87,15 +89,21 @@ module FitBankApi
       # @param [String] pix_key The PIX key of the one receiving the money.
       # @param [String] receiver_zip_code Zip Code of the city where the receiver is situtated.
       #   It is allowed to have a dash in the zip code.
+      # @param [String] payer_name The name of the one sending the money. Acording to FitBank
+      #   this is now required from the central bank of Brazil.
+      # @param [String] payer_tax_number CPF/CNPJ of the one sending the money. Acording to FitBank
+      #   this is now required from the central bank of Brazil.
       # @note For sandbox the pix_key must be registerd into FitBank's database via:
-      #   https://dev.fitbank.com.br/reference/217. For productino we can use already existing
+      #   https://dev.fitbank.com.br/reference/217. For production we can use already existing
       #   PIX key.
       def initialize(
         base_url:,
         receiver_bank_info:,
         credentials:,
         receiver_pix_key:,
-        receiver_zip_code:
+        receiver_zip_code:,
+        payer_name:,
+        payer_tax_number:
       )
         @generate_code_url = T.let(
           URI.join(base_url, 'main/execute/GenerateDynamicPixQRCode'), URI::Generic
@@ -103,10 +111,20 @@ module FitBankApi
         @get_code_by_id_url = T.let(
           URI.join(base_url, 'main/execute/GetPixQRCodeById'), URI::Generic
         )
+
+        if CPF.valid?(payer_tax_number)
+          @payer_tax_number = T.let(CPF.new(payer_tax_number).stripped, String)
+        elsif CNPJ.valid?(payer_tax_number)
+          @payer_tax_number = T.let(CNPJ.new(payer_tax_number).stripped, String)
+        else
+          # TODO: Create custom exception
+          raise 'Invalid receiver document'
+        end
         @receiver_bank_info = receiver_bank_info
         @credentials = credentials
         @receiver_pix_key = receiver_pix_key
         @receiver_zip_code = receiver_zip_code
+        @payer_name = payer_name
       end
 
       sig do
@@ -158,7 +176,9 @@ module FitBankApi
           # (TransactionValue, TransactionChangeType) are aplicable only
           # if TransactionPurpose = TransactionPurpose::Withdraw
           TransactionValue: nil,
-          TransactionChangeType: nil
+          TransactionChangeType: nil,
+          PayerName: @payer_name,
+          PayerTaxNumber: @payer_tax_number
         }.merge(@receiver_bank_info.to_h)
 
         FitBankApi::Utils::HTTP.post!(@generate_code_url, payload, @credentials)
