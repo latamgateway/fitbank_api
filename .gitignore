@@ -9,3 +9,4 @@ doc/
 .byebug_history
 
 .env.test.local
+.env.local
