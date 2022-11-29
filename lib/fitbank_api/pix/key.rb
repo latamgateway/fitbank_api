@@ -47,7 +47,7 @@ module FitBankApi
           pix_key: String,
           key_type: FitBankApi::Pix::Key::KeyType,
           tax_number: String
-        ).returns(T::Hash[Symbol, T.untyped])
+        ).returns(FitBankApi::Entities::PixKeyInfo)
       end
       def get_info(pix_key:, key_type:, tax_number:)
         payload = {
@@ -59,7 +59,9 @@ module FitBankApi
           TaxNumber: FitBankApi::Utils::TaxNumber.new(tax_number).to_s
         }
 
-        FitBankApi::Utils::HTTP.post!(@get_key_info_url, payload, @credentials)
+        body = FitBankApi::Utils::HTTP.post!(@get_key_info_url, payload, @credentials)
+
+        FitBankApi::Entities::PixKeyInfo.from_hash(body)
       end
     end
   end

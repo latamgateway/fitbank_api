@@ -25,11 +25,8 @@ RSpec.describe FitBankApi::Pix::Key do
 
     context 'valid input' do
       it 'gets info' do
-        expect(info_response[:Success]).to eq('true')
-        expect(info_response).to have_key(:SearchProtocol)
-        expect(info_response).to have_key(:Infos)
-        expect(info_response[:Infos][:ReceiverTaxNumber]).to eq(tax_number)
-        expect(info_response[:Infos][:PixKeyValue]).to eq(pix_key)
+        expect(info_response.tax_number).to eq(tax_number)
+        expect(info_response.pix_key).to eq(pix_key)
       end
     end
 
