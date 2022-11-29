@@ -35,20 +35,39 @@ RSpec.describe FitBankApi::Pix::DynamicQrCode do
       end
     end
 
-    it 'can generate dynamic QR code' do
-      expect(generate_response[:Success]).to eq('true')
-      expect(generate_response).to have_key(:DocumentNumber)
+    describe 'generate' do
+      it 'generates dynamic QR code' do
+        expect(generate_response[:Success]).to eq('true')
+        expect(generate_response).to have_key(:DocumentNumber)
+      end
     end
 
-    it 'can get dynamic QR code' do
-      VCR.use_cassette('pix/qr_code/dynamic/find_by_id') do
-        response = qr_code_manager.find_by_id(generate_response[:DocumentNumber].to_s)
+    describe 'info' do
+      let(:info_by_id) do
+        VCR.use_cassette('pix/qr_code/dynamic/find_by_id') do
+          qr_code_manager.find_by_id(generate_response[:DocumentNumber].to_s)
+        end
+      end
 
-        expect(response[:Success]).to eq('true')
-        expect(response).to have_key(:GetPixQRCodeByIdInfo)
-        expect(response[:GetPixQRCodeByIdInfo]).to have_key(:QRCodeBase64)
-        expect(response[:GetPixQRCodeByIdInfo]).to have_key(:HashCode)
-        expect(response[:GetPixQRCodeByIdInfo][:Status]).not_to eq('Error')
+      it 'gets dynamic QR code' do
+        expect(info_by_id[:Success]).to eq('true')
+        expect(info_by_id).to have_key(:GetPixQRCodeByIdInfo)
+        expect(info_by_id[:GetPixQRCodeByIdInfo]).to have_key(:QRCodeBase64)
+        expect(info_by_id[:GetPixQRCodeByIdInfo][:QRCodeBase64].strip).not_to be_empty
+        expect(info_by_id[:GetPixQRCodeByIdInfo]).to have_key(:HashCode)
+        expect(info_by_id[:GetPixQRCodeByIdInfo][:HashCode].strip).not_to be_empty
+        expect(info_by_id[:GetPixQRCodeByIdInfo][:Status]).not_to eq('Error')
+      end
+
+      it 'get info by hash code' do
+        info_by_hash_code = VCR.use_cassette('pix/qr_code/dynamic/info_by_hash_code') do
+          qr_code_manager.get_info_from_hash(info_by_id[:GetPixQRCodeByIdInfo][:HashCode])
+        end
+
+        expect(info_by_hash_code[:Success]).to eq('true')
+        expect(info_by_hash_code).to have_key(:SearchProtocol)
+        expect(info_by_hash_code).to have_key(:Infos)
+        expect(info_by_hash_code[:Infos]).to have_key(:FinalValue)
       end
     end
   end

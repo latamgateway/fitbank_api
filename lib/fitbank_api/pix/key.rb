@@ -50,14 +50,13 @@ module FitBankApi
         ).returns(T::Hash[Symbol, T.untyped])
       end
       def get_info(pix_key:, key_type:, tax_number:)
-        validator = FitBankApi::Utils::TaxNumberValidator.new(tax_number)
         payload = {
           Method: 'GetInfosPixKey',
           PartnerId: @credentials.partner_id,
           BusinessUnitId: @credentials.business_unit_id,
           PixKey: pix_key,
           PixKeyType: key_type.to_i,
-          TaxNumber: validator.tax_number
+          TaxNumber: FitBankApi::Utils::TaxNumber.new(tax_number).to_s
         }
 
         FitBankApi::Utils::HTTP.post!(@get_key_info_url, payload, @credentials)

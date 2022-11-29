@@ -86,7 +86,7 @@ module FitBankApi
       #   for the one receiving the money. In our case this is Latam's bank info
       # @param [FitBankApi::Entities::Credentials] credentials Credentials used to
       #   access the API
-      # @param [String] pix_key The PIX key of the one receiving the money.
+      # @param [String] receiver_pix_key The PIX key of the one receiving the money.
       # @param [String] receiver_zip_code Zip Code of the city where the receiver is situtated.
       #   It is allowed to have a dash in the zip code.
       # @param [String] payer_name The name of the one sending the money. Acording to FitBank
@@ -111,15 +111,13 @@ module FitBankApi
         @get_code_by_id_url = T.let(
           URI.join(base_url, 'main/execute/GetPixQRCodeById'), URI::Generic
         )
+        @get_info_from_hash_url = T.let(
+          URI.join(base_url, 'main/execute/GetInfosPixHashCode'), URI::Generic
+        )
 
-        if CPF.valid?(payer_tax_number)
-          @payer_tax_number = T.let(CPF.new(payer_tax_number).stripped, String)
-        elsif CNPJ.valid?(payer_tax_number)
-          @payer_tax_number = T.let(CNPJ.new(payer_tax_number).stripped, String)
-        else
-          # TODO: Create custom exception
-          raise 'Invalid receiver document'
-        end
+        @payer_tax_number = T.let(
+          FitBankApi::Utils::TaxNumber.new(payer_tax_number).to_s, String
+        )
         @receiver_bank_info = receiver_bank_info
         @credentials = credentials
         @receiver_pix_key = receiver_pix_key
@@ -198,6 +196,26 @@ module FitBankApi
         }
 
         FitBankApi::Utils::HTTP.post!(@get_code_by_id_url, payload, @credentials)
+      end
+
+      sig { params(hash: String).returns(T::Hash[Symbol, T.untyped]) }
+      # Retrieve data for the dynamic qr code by the hash returned from FitBankApi::Pix::DynamicQrCode#find_by_id
+      # The response contains more info (including bank details and SearchProtocol used to simulate payment in
+      # sandbox environment)
+      #
+      # Docs: https://dev.fitbank.com.br/reference/274
+      # @param [String] hash The HashCode returned from FitBankApi::Pix::DynamicQrCode#find_by_id
+      def get_info_from_hash(hash)
+        decoded_hash = Base64.decode64(hash)
+        payload = {
+          Method: 'GetInfosPixHashCode',
+          PartnerId: @credentials.partner_id,
+          BusinessUnitId: @credentials.business_unit_id,
+          Hash: decoded_hash,
+          TaxNumber: @credentials.cnpj
+        }
+
+        FitBankApi::Utils::HTTP.post!(@get_info_from_hash_url, payload, @credentials)
       end
     end
   end

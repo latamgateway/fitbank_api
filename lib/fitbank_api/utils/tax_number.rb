@@ -3,7 +3,7 @@
 
 module FitBankApi
   module Utils
-    class TaxNumberValidator
+    class TaxNumber
       extend T::Sig
 
       sig { returns(String) }
@@ -18,6 +18,11 @@ module FitBankApi
         else
           raise 'Invalid tax number'
         end
+      end
+
+      sig { returns(String) }
+      def to_s
+        @tax_number
       end
     end
   end

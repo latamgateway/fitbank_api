@@ -5,7 +5,7 @@ http_interactions:
     uri: https://sandboxapi.fitbank.com.br/main/execute/GetPixQRCodeById
     body:
       encoding: UTF-8
-      string: '{"Method":"GetPixQRCodeById","PartnerId":1012,"BusinessUnitId":1526,"DocumentNumber":"12953","TaxNumber":"33630661000150"}'
+      string: '{"Method":"GetPixQRCodeById","PartnerId":1012,"BusinessUnitId":1526,"DocumentNumber":"13000","TaxNumber":"33630661000150"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -31,7 +31,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Mon, 28 Nov 2022 16:27:41 GMT
+      - Tue, 29 Nov 2022 11:06:11 GMT
       Cache-Control:
       - private
       Server:
@@ -47,14 +47,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 8402092ddffda84e288d42c5892ec70a.cloudfront.net (CloudFront)
+      - 1.1 9e57ae85e9f9916646cb28d48aa52fd2.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - SOF50-C1
       X-Amz-Cf-Id:
-      - TFgEt6EtR1n8V4JE5y-w55DC_zGNq0K_tXmtVuqiPx5-UKba5ZbRgg==
+      - 3MjHC7nxq88OrNwfYQNheJ8i78_G1NfKaxWg_ZiPkeKlMyRcoXRkvw==
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJTdWNjZXNzIjoidHJ1ZSIsIkdldFBpeFFSQ29kZUJ5SWRJbmZvIjp7IklkZW50aWZpZXIiOiIzY2M1MDdjOS02YmJiLTQ5MjctOTFlMy1hYzkwZGZjNDc2M2YiLCJQaXhRUkNvZGVUeXBlIjoiRHluYW1pYyIsIlBpeEtleSI6IjMzNjMwNjYxMDAwMTUwIiwiU3RhdHVzIjoiUmVnaXN0ZXJpbmciLCJDaXR5IjoiTWFyaW5nw6EiLCJaaXBDb2RlIjoiODcwMTA0MzAiLCJQYXllck5hbWUiOiJRQSBPcHMiLCJQYXllclRheE51bWJlciI6IjE3Nzc0MDc2MDUwIiwiUmVjZWl2ZXJOYW1lIjoiTGF0YW0gVGVjbm9sb2dpYSBJbnN0aXR1acOnYW8gZGUgUGFnYW1lbnRvIEx0ZGEiLCJSZWNlaXZlclRheE51bWJlciI6IjMzNjMwNjYxMDAwMTUwIiwiQ2hhbmdlVHlwZSI6Ik5vbmUiLCJQcmluY2lwYWxWYWx1ZSI6IlIkMjAsMDAiLCJEdWVEYXRlIjpudWxsLCJSZWJhdGVWYWx1ZSI6bnVsbCwiSW50ZXJlc3RWYWx1ZSI6bnVsbCwiRmluZVZhbHVlIjpudWxsLCJSZXVzYWJsZSI6ZmFsc2UsIlBheWVyUmVxdWVzdCI6bnVsbCwiRXhwaXJhdGlvbkRhdGUiOiIyOC8xMi8yMDIyIiwiVHJhbnNhY3Rpb25DaGFuZ2VUeXBlIjpudWxsLCJUcmFuc2FjdGlvblZhbHVlIjpudWxsLCJUcmFuc2FjdGlvblB1cnBvc2UiOiJQdXJjaGFzZU9yVHJhbnNmZXIiLCJBZ2VudE1vZGFsaXR5IjpudWxsLCJDcmVhdGlvbkRhdGUiOiIyOC8xMS8yMDIyIiwiUVJDb2RlQmFzZTY0IjoiICIsIkhhc2hDb2RlIjoiICJ9fQ==
-  recorded_at: Mon, 28 Nov 2022 16:27:42 GMT
+        eyJTdWNjZXNzIjoidHJ1ZSIsIkdldFBpeFFSQ29kZUJ5SWRJbmZvIjp7IklkZW50aWZpZXIiOiI5MjA5MDQzMS05NmQ3LTQxZWEtOTNkYi1kYzFhOTkwYTgzY2EiLCJQaXhRUkNvZGVUeXBlIjoiRHluYW1pYyIsIlBpeEtleSI6IjMzNjMwNjYxMDAwMTUwIiwiU3RhdHVzIjoiUmVnaXN0ZXJpbmciLCJDaXR5IjoiTWFyaW5nw6EiLCJaaXBDb2RlIjoiODcwMTA0MzAiLCJQYXllck5hbWUiOiJRQSBPcHMiLCJQYXllclRheE51bWJlciI6IjE3Nzc0MDc2MDUwIiwiUmVjZWl2ZXJOYW1lIjoiTGF0YW0gVGVjbm9sb2dpYSBJbnN0aXR1acOnYW8gZGUgUGFnYW1lbnRvIEx0ZGEiLCJSZWNlaXZlclRheE51bWJlciI6IjMzNjMwNjYxMDAwMTUwIiwiQ2hhbmdlVHlwZSI6Ik5vbmUiLCJQcmluY2lwYWxWYWx1ZSI6IlIkMjAsMDAiLCJEdWVEYXRlIjpudWxsLCJSZWJhdGVWYWx1ZSI6bnVsbCwiSW50ZXJlc3RWYWx1ZSI6bnVsbCwiRmluZVZhbHVlIjpudWxsLCJSZXVzYWJsZSI6ZmFsc2UsIlBheWVyUmVxdWVzdCI6bnVsbCwiRXhwaXJhdGlvbkRhdGUiOiIyOS8xMi8yMDIyIiwiVHJhbnNhY3Rpb25DaGFuZ2VUeXBlIjpudWxsLCJUcmFuc2FjdGlvblZhbHVlIjpudWxsLCJUcmFuc2FjdGlvblB1cnBvc2UiOiJQdXJjaGFzZU9yVHJhbnNmZXIiLCJBZ2VudE1vZGFsaXR5IjpudWxsLCJDcmVhdGlvbkRhdGUiOiIyOS8xMS8yMDIyIiwiUVJDb2RlQmFzZTY0IjoiICIsIkhhc2hDb2RlIjoiICJ9fQ==
+  recorded_at: Tue, 29 Nov 2022 11:06:11 GMT
 recorded_with: VCR 6.1.0

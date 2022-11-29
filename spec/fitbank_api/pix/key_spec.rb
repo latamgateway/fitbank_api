@@ -17,7 +17,7 @@ RSpec.describe FitBankApi::Pix::Key do
       VCR.use_cassette('pix/key/get_info') do
         client.get_info(
           pix_key: pix_key,
-          key_type: described_class::KeyType::TaxNumber,
+          key_type: FitBankApi::Pix::Key::KeyType::TaxNumber,
           tax_number: tax_number
         )
       end
