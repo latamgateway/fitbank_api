@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GetInfosPixKey
+    body:
+      encoding: UTF-8
+      string: '{"Method":"GetInfosPixKey","PartnerId":1012,"BusinessUnitId":1526,"PixKey":"03713592000187","PixKeyType":1,"TaxNumber":"03713592000187"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Host:
+      - sandboxapi.fitbank.com.br
+      Authorization:
+      - "<AUTH>"
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '400'
+      Connection:
+      - keep-alive
+      Date:
+      - Tue, 29 Nov 2022 16:05:08 GMT
+      Cache-Control:
+      - private
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnetmvc-Version:
+      - '4.0'
+      X-Aspnet-Version:
+      - 4.0.30319
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, AntiForgery, X-Requested-With, AccessToken
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 b71ecd1018f21aabbfe290f634d31212.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SOF50-C1
+      X-Amz-Cf-Id:
+      - hsphh63SSeqTjBMEEM88-FdX5WqxhCqIUmhqeYeFthtETVtYHQnd9g==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJTZWFyY2hQcm90b2NvbCI6MTUwMTY2LCJJbmZvcyI6eyJSZWNlaXZlck5hbWUiOiJDYXJsb3MgRWR1YXJkbyBGdXJxdWltIEJlemVycmEiLCJSZWNlaXZlcklTUEIiOiIxMzIwMzM1NCIsIlJlY2VpdmVyQmFuayI6IjQ1MCIsIlJlY2VpdmVyQmFua0JyYW5jaCI6IjEiLCJSZWNlaXZlckJhbmtBY2NvdW50IjoiMTkzNDY4ODQxIiwiUmVjZWl2ZXJCYW5rQWNjb3VudERpZ2l0IjoiMyIsIlJlY2VpdmVyQWNjb3VudFR5cGUiOiIwIiwiUGl4S2V5VHlwZSI6IjEiLCJQaXhLZXlWYWx1ZSI6IjAzNzEzNTkyMDAwMTg3IiwiUmVjZWl2ZXJUYXhOdW1iZXIiOiIwMzcxMzU5MjAwMDE4NyJ9fQ==
+  recorded_at: Tue, 29 Nov 2022 16:05:08 GMT
+recorded_with: VCR 6.1.0

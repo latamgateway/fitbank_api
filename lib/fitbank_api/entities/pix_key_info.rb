@@ -14,28 +14,36 @@ module FitBankApi
       const :bank_info, FitBankApi::Entities::BankInfo
       const :isbp, String
       const :name, String
-      const :key_type, Integer
+      const :key_type, String
       const :pix_key, String
       const :tax_number, String
       const :search_protocol, Integer
 
       sig { params(body: T::Hash[Symbol, T.untyped]).returns(FitBankApi::Entities::PixKeyInfo) }
       def self.from_hash(body)
+        # The API omits leading zeros for the bank_agency/bank_branch field.
+        # However the request to perform pix payment will crash if the leading
+        # zeroes are missing. The agency has 4 digits in total. So we prepend the
+        # missing zeroes.
+        bank_agency = body[:Infos][:ReceiverBankBranch]
+        to_prepend = 4 - bank_agency.size
+        to_prepend.times { bank_agency.prepend('0') }
+
         bank_info = FitBankApi::Entities::BankInfo.new(
           bank_code: body[:Infos][:ReceiverBank],
-          bank_agency: body[:Infos][:ReceiverBankBranch],
+          bank_agency: bank_agency,
           bank_account: body[:Infos][:ReceiverBankAccount],
-          bank_account_digit: body[:Infos][:ReceiverAccountType]
+          bank_account_digit: body[:Infos][:ReceiverBankAccountDigit]
         )
 
         FitBankApi::Entities::PixKeyInfo.new(
           bank_info: bank_info,
           isbp: body[:Infos][:ReceiverISPB],
           name: body[:Infos][:ReceiverName],
-          key_type: Integer(body[:Infos][:PixKeyType]),
+          key_type: body[:Infos][:PixKeyType],
           pix_key: body[:Infos][:PixKeyValue],
           tax_number: body[:Infos][:ReceiverTaxNumber],
-          search_protocol: Integer(body[:SearchProtocol])
+          search_protocol: body[:SearchProtocol]
         )
       end
     end

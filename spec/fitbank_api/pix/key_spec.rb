@@ -27,6 +27,7 @@ RSpec.describe FitBankApi::Pix::Key do
       it 'gets info' do
         expect(info_response.tax_number).to eq(tax_number)
         expect(info_response.pix_key).to eq(pix_key)
+        expect(info_response.bank_info.bank_agency.size).to eq(4)
       end
     end
 
