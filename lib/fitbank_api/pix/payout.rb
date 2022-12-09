@@ -172,7 +172,7 @@ module FitBankApi
           receiver_bank_info: FitBankApi::Entities::BankInfo,
           pix_key: T.nilable(String),
           pix_key_type: T.nilable(T.any(String, Integer)),
-          search_protocol: T.nilable(Integer),
+          search_protocol: T.nilable(T.any(Integer, String)),
           sender_tax_number: T.nilable(String)
         ).returns(T::Hash[Symbol, T.untyped])
       end

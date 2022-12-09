@@ -5,7 +5,8 @@ http_interactions:
     uri: https://sandboxapi.fitbank.com.br/main/execute/GetInfosPixHashCode
     body:
       encoding: UTF-8
-      string: '{"Method":"GetInfosPixHashCode","PartnerId":1012,"BusinessUnitId":1526,"Hash":"","TaxNumber":"33630661000150"}'
+      string: '{"Method":"GetInfosPixHashCode","PartnerId":1012,"BusinessUnitId":1526,"Hash":"00020101021226790014br.gov.bcb.pix2557qrcode-h.fitbank.com.br/QR/cob/EFE85DF21BAF5978797A9E8E9B5204000053039865802BR5925Latam
+        Tecnologia Institui6007Maringa61088701043062070503***6304FE06","TaxNumber":"33630661000150"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -27,11 +28,11 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '267'
+      - '1541'
       Connection:
       - keep-alive
       Date:
-      - Tue, 29 Nov 2022 10:57:02 GMT
+      - Fri, 09 Dec 2022 16:44:25 GMT
       Cache-Control:
       - private
       Server:
@@ -47,14 +48,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 027fb676af23e5e8545e552038c4e1b0.cloudfront.net (CloudFront)
+      - 1.1 737cc0360b2df6a9db7576a460128378.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - LHR50-P6
+      - SOF50-C1
       X-Amz-Cf-Id:
-      - rKUoN6Ur2-SHUFzaqmHuGuXN_azWVlXBluUlexgvhrf2w9JoPhSFxw==
+      - xg9NUCOj09wMmfoNTlMWTz5CVzkOqA_SIvdNjEbliSOz7mBuJAVE3A==
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJTdWNjZXNzIjoiZmFsc2UiLCJNZXNzYWdlIjoiSVNFMDAxNCAtIEluZm9ybWHDp8O1ZXMgZW52aWFkYXMgZXN0w6NvIGludsOhbGlkYXMuIFZlamEgYSBwcm9wcmllZGFkZSBWYWxpZGF0aW9uIGRvIGpzb24gcGFyYSBtYWlzIGRldGFsaGVzLiIsIlZhbGlkYXRpb24iOlt7IktleSI6Ikhhc2giLCJWYWx1ZSI6WyJJU0kwMzI4IC0gVm9jw6ogbsOjbyBwb3NzdWkgcGVybWlzc8OjbyBwYXJhIGNyaWFyIHJlZ3JhcyBkZSBjb21wcmEgTXVsdGkgQmVuZWbDrWNpbyJdfV19
-  recorded_at: Tue, 29 Nov 2022 10:57:03 GMT
+        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJTZWFyY2hQcm90b2NvbCI6MTUwNTYzLCJJbmZvcyI6eyJIYXNoIjoiMDAwMjAxMDEwMjEyMjY3OTAwMTRici5nb3YuYmNiLnBpeDI1NTdxcmNvZGUtaC5maXRiYW5rLmNvbS5ici9RUi9jb2IvRUZFODVERjIxQkFGNTk3ODc5N0E5RThFOUI1MjA0MDAwMDUzMDM5ODY1ODAyQlI1OTI1TGF0YW0gVGVjbm9sb2dpYSBJbnN0aXR1aTYwMDdNYXJpbmdhNjEwODg3MDEwNDMwNjIwNzA1MDMqKio2MzA0RkUwNiIsIlJlY2VpdmVyQmFuayI6IjQ1MCIsIlJlY2VpdmVySVNQQiI6IjEzMjAzMzU0IiwiUmVjZWl2ZXJCYW5rQnJhbmNoIjoiMSIsIlJlY2VpdmVyQmFua0FjY291bnQiOiIxOTQwMTM4MjUiLCJSZWNlaXZlckJhbmtBY2NvdW50RGlnaXQiOiI2IiwiUmVjZWl2ZXJBY2NvdW50VHlwZSI6IjAiLCJUeXBlIjoiMSIsIlN0YXR1cyI6IjAiLCJQaXhLZXlWYWx1ZSI6IjMzNjMwNjYxMDAwMTUwIiwiRXh0ZXJuYWxJZGVudGlmaWVyIjpudWxsLCJSZWNlaXZlck5hbWUiOiJMYXRhbSBUZWNub2xvZ2lhIEluc3RpdHVpw6dhbyBkZSBQYWdhbWVudG8gTHRkYSIsIlJlY2VpdmVyVGF4TnVtYmVyIjoiMzM2MzA2NjEwMDAxNTAiLCJEZXNjcmlwdGlvbiI6bnVsbCwiUGF5ZXJOYW1lIjoiTUFURVVTIFJPRFJJR1VFUyIsIlBheWVyVGF4TnVtYmVyIjpudWxsLCJaaXBDb2RlIjoiODcwMTA0MzAiLCJDaXR5IjoiTWFyaW5nYSIsIk9yaWdpbmFsVmFsdWUiOiIyMCIsIkV4cGlyYXRpb25EYXRlIjpudWxsLCJPcmlnaW5hbENyZWF0aW9uRGF0ZSI6IjIwMjItMTItMDlUMTY6NDQ6MDkuMzI5WiIsIlVybCI6InFyY29kZS1oLmZpdGJhbmsuY29tLmJyL1FSL2NvYi9FRkU4NURGMjFCQUY1OTc4Nzk3QTlFOEU5QiIsIlJldXNhYmxlIjoiRmFsc2UiLCJVRiI6bnVsbCwiUmViYXRlVmFsdWUiOm51bGwsIkRpc2NvdW50VmFsdWUiOm51bGwsIkludGVyZXN0VmFsdWUiOm51bGwsIkZpbmFsVmFsdWUiOm51bGwsIkZpbmVWYWx1ZSI6bnVsbCwiRHVlRGF0ZSI6bnVsbCwiRGF5c0FmdGVyRHVlRGF0ZSI6bnVsbCwiUGF5bWVudERhdGUiOm51bGwsIkNhdGVnb3J5Q29kZSI6bnVsbCwiQWRkaXRpb25hbERhdGEiOiJudWxsIiwiUGF5ZXJSZXF1ZXN0IjpudWxsLCJFeHBpcmF0aW9uUXJDb2RlIjoiMjYyODk4NCIsIlJlY2VpdmVyVHJhZGluZ05hbWUiOm51bGwsIlJlY2VpdmVyUHVibGljUGxhY2UiOm51bGwsIklzcGJQc3MiOm51bGwsIkNoYW5nZVR5cGUiOiIwIiwiV2l0aGRyYXdUcmFuc2FjdGlvblZhbHVlIjpudWxsLCJUcmFuc2FjdGlvbkNoYW5nZVR5cGUiOm51bGwsIldpdGhkcmF3SXNwYlBzcyI6bnVsbCwiV2l0aGRyYXdBZ2VudE1vZGFsaXR5IjpudWxsLCJQdXJjaGFzZVdpdGhDaGFuZ2VWYWx1ZSI6bnVsbCwiUHVyY2hhc2VXaXRoQ2hhbmdlVHJhbnNhY3Rpb25DaGFuZ2VUeXBlIjpudWxsLCJQdXJjaGFzZVdpdGhDaGFuZ2VJc3BiUHNzIjpudWxsLCJQdXJjaGFzZVdpdGhDaGFuZ2VBZ2VudE1vZGFsaXR5IjpudWxsfX0=
+  recorded_at: Fri, 09 Dec 2022 16:44:25 GMT
 recorded_with: VCR 6.1.0

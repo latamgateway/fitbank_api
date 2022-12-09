@@ -5,8 +5,8 @@ http_interactions:
     uri: https://sandboxapi.fitbank.com.br/main/execute/GenerateDynamicPixQRCode
     body:
       encoding: UTF-8
-      string: '{"Method":"GenerateDynamicPixQRCode","PartnerId":1012,"BusinessUnitId":1526,"PixKey":"33630661000150","TaxNumber":"33630661000150","PrincipalValue":"20.0","ExpirationDate":"2022/12/29","Identifier":"92090431-96d7-41ea-93db-dc1a990a83ca","Address":{"ZipCode":"87010430"},"ChangeType":0,"TransactionPurpose":0,"AgentModality":2,"TransactionValue":null,"TransactionChangeType":null,"PayerName":"Amarillys
-        Félix","PayerTaxNumber":"17774076050","Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}'
+      string: '{"Method":"GenerateDynamicPixQRCode","PartnerId":1012,"BusinessUnitId":1526,"PixKey":"33630661000150","TaxNumber":"33630661000150","PrincipalValue":"20.0","ExpirationDate":"2023/01/08","Identifier":"3534c926-4c8e-46e2-b502-0b4225e15f58","Address":{"ZipCode":"87010430"},"ChangeType":0,"TransactionPurpose":0,"AgentModality":2,"TransactionValue":null,"TransactionChangeType":null,"PayerName":"MATEUS
+        RODRIGUES BARROSO DOS SANTOS","PayerTaxNumber":"07890396309","Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -32,7 +32,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Tue, 29 Nov 2022 11:06:10 GMT
+      - Fri, 09 Dec 2022 16:43:34 GMT
       Cache-Control:
       - private
       Server:
@@ -48,14 +48,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 ab553edf4372e7270c4dfe91ddaa27ec.cloudfront.net (CloudFront)
+      - 1.1 3dd1b09eec76c0aa4f9a7b74344d67b2.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - SOF50-C1
       X-Amz-Cf-Id:
-      - XFfZdV8KlmNjSUZ04fsgF2sV5bzgO4E051QWh49fFLtYChvwmLtdOg==
+      - Uc7jxbzZWAomWsu1jumTgZo30zRdpfXCQlyyINeldSvFGAK6JUqO5A==
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJEb2N1bWVudE51bWJlciI6MTMwMDB9
-  recorded_at: Tue, 29 Nov 2022 11:06:10 GMT
+        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJEb2N1bWVudE51bWJlciI6MTMzODl9
+  recorded_at: Fri, 09 Dec 2022 16:43:35 GMT
 recorded_with: VCR 6.1.0
