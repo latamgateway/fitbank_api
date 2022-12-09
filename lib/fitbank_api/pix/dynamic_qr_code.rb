@@ -217,6 +217,59 @@ module FitBankApi
 
         FitBankApi::Utils::HTTP.post!(@get_info_from_hash_url, payload, @credentials)
       end
+
+      sig do
+        params(
+          sender_bank_info: FitBankApi::Entities::BankInfo,
+          receiver_pix_key_info: FitBankApi::Entities::PixKeyInfo,
+          request_id: String,
+          value: BigDecimal,
+          search_protocol: T.any(Integer, Strng)
+        )
+      end
+      # Simulate a payment of Dynamic QR Code in sandbox environemt. This will trigger a
+      # webhook and will change the status of the dynamic qr code to paid in FitBank's system.
+      # The steps to do it are as follows:
+      #  1. Gnerate Dynamic QR Code by calling FitBankApi::Pix::DynamicQrCode#generate
+      #  2. Take the DocumentNumber returned from FitBankApi::Pix::DynamicQrCode#generate
+      #  3. Take the HashCode returned by FitBankApi::Pix::DynamicQrCode#find_by_id
+      #  4. Take the SearchProtocol returned by FitBankApi::Pix::DynamicQrCode#get_info_from_hash
+      #  5. Make a payout by pix key with FitBankApi::Pix::Payout#by_pix_key. In the payout
+      #   the sender is the customer and the receiver is company calling the API
+      # @param [FitBankApi::Entities::BankInfo] sender_bank_info Bank info of the customer who
+      #   is paying via QRCode
+      # @param [FitBankApi::Entities::PixKeyInfo] receiver_pix_key_info Pix key info generated
+      #   by FitBankApi::Pix::Key#get_info. This is the PIX key info of the one receiving the
+      #   money.
+      # @param [Strng] request_id Idempotency key for the request
+      # @param [BigDecimal] value The value of the DynamicQrCode
+      # @param [Strng, Integer] search_protocol The SearchProtocol field returned by
+      #   FitBankApi::Pix::DynamicQrCode#get_info_from_hash
+      #
+      # @note This function should be used only in sandbox environemt
+      def simulate_payment(
+        sender_bank_info:,
+        receiver_pix_key_info:,
+        request_id:,
+        value:,
+        search_protocol:
+      )
+        payout_manager = FitBankApi::Pix::Payout.new(
+          base_url: @base_url,
+          request_id: request_id,
+          receiver_bank_info: receiver_pix_key.bank_info,
+          sender_bank_info: sender_bank_info,
+          credentials: @credentials,
+          receiver_name: receiver_pix_key.name,
+          receiver_document: receiver_pix_key_info.tax_number,
+          value: value
+        )
+
+        payout_manager.by_pix_key(
+          key_info: receiver_pix_key_info,
+          search_protocol: search_protocol
+        )
+      end
     end
   end
 end
