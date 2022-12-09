@@ -12,8 +12,8 @@ RSpec.describe FitBankApi::Pix::DynamicQrCode do
     let(:credentials) { build(:credentials) }
     let(:base_url) { ENV.fetch('FITBANK_BASE_URL') }
     let(:receiver_zip_code) { ENV.fetch('LATAM_ZIP_CODE') }
-    let(:payer_name) { 'Amarillys Félix' }
-    let(:payer_tax_number) { '17774076050' }
+    let(:payer_name) { 'MATEUS RODRIGUES BARROSO DOS SANTOS' }
+    let(:payer_tax_number) { '07890396309' }
     let(:qr_code_manager) do
       described_class.new(
           base_url: base_url,
@@ -68,6 +68,87 @@ RSpec.describe FitBankApi::Pix::DynamicQrCode do
         expect(info_by_hash_code).to have_key(:SearchProtocol)
         expect(info_by_hash_code).to have_key(:Infos)
         expect(info_by_hash_code[:Infos]).to have_key(:FinalValue)
+      end
+    end
+
+    describe 'simulate payment' do
+      let(:sender_bank_info) do
+        FitBankApi::Entities::BankInfo.new(
+          bank_code: '450',
+          bank_agency: '0001',
+          bank_account: '199392157',
+          bank_account_digit: '3'
+        )
+      end
+
+      let(:qr_code_value) { BigDecimal('0.01') }
+
+      let(:qr_code) do
+        VCR.use_cassette('pix/qr_code/dynamic/simulate_payment/generate') do
+          qr_code_manager.generate(
+            value: qr_code_value,
+            expiartion_date: Date.today + 30,
+            id: SecureRandom.uuid
+          )
+        end
+      end
+
+      let(:qr_code_info) do
+        VCR.use_cassette('pix/qr_code/dynamic/simulate_payment/find_by_id') do
+          qr_code_manager.find_by_id(
+            qr_code[:DocumentNumber].to_s
+          )
+        end
+      end
+
+      let(:hash_code_info) do
+        VCR.use_cassette('pix/qr_code/dynamic/simulate_payment/hash_code_info') do
+          qr_code_manager.get_info_from_hash(qr_code_info[:GetPixQRCodeByIdInfo][:HashCode])
+        end
+      end
+
+      let(:pix_key_manager) { FitBankApi::Pix::Key.new(base_url: base_url, credentials: credentials) }
+
+      let(:receiver_pix_key_info) do
+        VCR.use_cassette('pix/qr_code/dynamic/simulate_payment/receiver_pix_key_info') do
+          pix_key_manager.get_info(
+            pix_key: credentials.cnpj,
+            key_type: FitBankApi::Pix::Key::KeyType::TaxNumber,
+            tax_number: credentials.cnpj
+          )
+        end
+      end
+
+      let(:payment_simulation) do
+        VCR.use_cassette('pix/qr_code/dynamic/simulate_payment/simulate_payment') do
+          qr_code_manager.simulate_payment(
+            sender_bank_info: sender_bank_info,
+            receiver_pix_key_info: receiver_pix_key_info,
+            request_id: SecureRandom.uuid,
+            value: qr_code_value,
+            search_protocol: hash_code_info[:SearchProtocol],
+            sender_tax_number: payer_tax_number
+          )
+        end
+      end
+
+      let(:qr_code_info_paid) do
+        VCR.use_cassette('pix/qr_code/dynamic/simulate_payment/find_by_id_paid') do
+          qr_code_manager.find_by_id(
+            qr_code[:DocumentNumber].to_s
+          )
+        end
+      end
+
+      it 'simulates payment of dynamic qr code' do
+        expect(qr_code[:Success]).to eq('true')
+        expect(qr_code_info[:Success]).to eq('true')
+        expect(qr_code_info[:GetPixQRCodeByIdInfo][:Status].strip).to eq('Processed')
+        expect(qr_code_info[:GetPixQRCodeByIdInfo][:HashCode].strip).not_to be_empty
+        expect(hash_code_info[:Success]).to eq('true')
+        expect(payment_simulation[:Success]).to eq('true')
+        expect(qr_code_info_paid[:Success]).to eq('true')
+        expect(qr_code_info_paid[:GetPixQRCodeByIdInfo][:Status]).to eq('Settled')
       end
     end
   end

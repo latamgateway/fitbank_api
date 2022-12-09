@@ -118,6 +118,7 @@ module FitBankApi
         @payer_tax_number = T.let(
           FitBankApi::Utils::TaxNumber.new(payer_tax_number).to_s, String
         )
+        @base_url = base_url
         @receiver_bank_info = receiver_bank_info
         @credentials = credentials
         @receiver_pix_key = receiver_pix_key
@@ -221,11 +222,12 @@ module FitBankApi
       sig do
         params(
           sender_bank_info: FitBankApi::Entities::BankInfo,
+          sender_tax_number: String,
           receiver_pix_key_info: FitBankApi::Entities::PixKeyInfo,
           request_id: String,
           value: BigDecimal,
-          search_protocol: T.any(Integer, Strng)
-        )
+          search_protocol: T.any(Integer, String)
+        ).returns(T::Hash[Symbol, T.untyped])
       end
       # Simulate a payment of Dynamic QR Code in sandbox environemt. This will trigger a
       # webhook and will change the status of the dynamic qr code to paid in FitBank's system.
@@ -238,6 +240,8 @@ module FitBankApi
       #   the sender is the customer and the receiver is company calling the API
       # @param [FitBankApi::Entities::BankInfo] sender_bank_info Bank info of the customer who
       #   is paying via QRCode
+      # @param [String] sender_tax_number The CPF/CNPJ of the person/company paying the PIX via
+      #   qr code.
       # @param [FitBankApi::Entities::PixKeyInfo] receiver_pix_key_info Pix key info generated
       #   by FitBankApi::Pix::Key#get_info. This is the PIX key info of the one receiving the
       #   money.
@@ -249,6 +253,7 @@ module FitBankApi
       # @note This function should be used only in sandbox environemt
       def simulate_payment(
         sender_bank_info:,
+        sender_tax_number:,
         receiver_pix_key_info:,
         request_id:,
         value:,
@@ -257,17 +262,18 @@ module FitBankApi
         payout_manager = FitBankApi::Pix::Payout.new(
           base_url: @base_url,
           request_id: request_id,
-          receiver_bank_info: receiver_pix_key.bank_info,
+          receiver_bank_info: receiver_pix_key_info.bank_info,
           sender_bank_info: sender_bank_info,
           credentials: @credentials,
-          receiver_name: receiver_pix_key.name,
+          receiver_name: receiver_pix_key_info.name,
           receiver_document: receiver_pix_key_info.tax_number,
           value: value
         )
 
         payout_manager.by_pix_key(
           key_info: receiver_pix_key_info,
-          search_protocol: search_protocol
+          search_protocol: search_protocol,
+          sender_tax_number: sender_tax_number
         )
       end
     end
