@@ -12,7 +12,7 @@ module FitBankApi
       extend T::Sig
 
       const :bank_info, FitBankApi::Entities::BankInfo
-      const :isbp, String
+      const :isbp, T.nilable(String)
       const :name, String
       const :key_type, String
       const :pix_key, String
