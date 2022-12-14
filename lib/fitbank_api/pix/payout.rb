@@ -136,7 +136,8 @@ module FitBankApi
         params(
           key_info: FitBankApi::Entities::PixKeyInfo,
           search_protocol: T.nilable(T.any(Integer, String)),
-          sender_tax_number: T.nilable(String)
+          sender_tax_number: T.nilable(String),
+          pix_key_type: T.nilable(FitBankApi::Pix::Key::KeyType)
         ).returns(T::Hash[Symbol, T.untyped])
       end
       # Perform pix payment via PixKey. In order to perform such payment, the caller
@@ -149,15 +150,19 @@ module FitBankApi
       # @param [String] sender_tax_number CPF/CNPJ of the person/company sending the money.
       #   Leave blank by default. It is used in sandbox environemt to simulate paying of
       #   dynamic qr codes.
+      # @param [FitBankApi::Pix::Key::KeyType] pix_key_type Explicitly set the pix key type
+      #   for the PIX in key_info. If not set will use the data from key_info. The in key_info
+      #   could be wrong. FitBank are "Working on it".
       def by_pix_key(
         key_info:,
         search_protocol: nil,
-        sender_tax_number: nil
+        sender_tax_number: nil,
+        pix_key_type: nil
       )
         key_payment_payload = payload(
           receiver_bank_info: key_info.bank_info,
           pix_key: key_info.pix_key,
-          pix_key_type: key_info.key_type,
+          pix_key_type: pix_key_type&.to_i || key_info.key_type,
           search_protocol: search_protocol,
           sender_tax_number: sender_tax_number
         )

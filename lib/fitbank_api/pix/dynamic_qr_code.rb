@@ -273,7 +273,8 @@ module FitBankApi
         payout_manager.by_pix_key(
           key_info: receiver_pix_key_info,
           search_protocol: search_protocol,
-          sender_tax_number: sender_tax_number
+          sender_tax_number: sender_tax_number,
+          pix_key_type: FitBankApi::Pix::Key::KeyType::TaxNumber
         )
       end
     end
