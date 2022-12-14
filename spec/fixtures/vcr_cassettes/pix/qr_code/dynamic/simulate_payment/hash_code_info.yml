@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GetInfosPixHashCode
+    body:
+      encoding: UTF-8
+      string: '{"Method":"GetInfosPixHashCode","PartnerId":1012,"BusinessUnitId":1526,"Hash":"00020101021226790014br.gov.bcb.pix2557qrcode-h.fitbank.com.br/QR/cob/DDA89B9118CBC1533345BC02815204000053039865802BR5925Latam
+        Tecnologia Institui6007Maringa61088701043062070503***6304CAB2","TaxNumber":"33630661000150"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Host:
+      - sandboxapi.fitbank.com.br
+      Authorization:
+      - "<AUTH>"
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1543'
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 09 Dec 2022 15:26:49 GMT
+      Cache-Control:
+      - private
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnetmvc-Version:
+      - '4.0'
+      X-Aspnet-Version:
+      - 4.0.30319
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, AntiForgery, X-Requested-With, AccessToken
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 06b51ee570aa937143515103d6a51628.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SOF50-C1
+      X-Amz-Cf-Id:
+      - N_ENKe5wZz-1qMEtBFvT2TBInt1NB_M1ByeJQkPxeps7IzdIhtH9AQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJTZWFyY2hQcm90b2NvbCI6MTUwNTYxLCJJbmZvcyI6eyJIYXNoIjoiMDAwMjAxMDEwMjEyMjY3OTAwMTRici5nb3YuYmNiLnBpeDI1NTdxcmNvZGUtaC5maXRiYW5rLmNvbS5ici9RUi9jb2IvRERBODlCOTExOENCQzE1MzMzNDVCQzAyODE1MjA0MDAwMDUzMDM5ODY1ODAyQlI1OTI1TGF0YW0gVGVjbm9sb2dpYSBJbnN0aXR1aTYwMDdNYXJpbmdhNjEwODg3MDEwNDMwNjIwNzA1MDMqKio2MzA0Q0FCMiIsIlJlY2VpdmVyQmFuayI6IjQ1MCIsIlJlY2VpdmVySVNQQiI6IjEzMjAzMzU0IiwiUmVjZWl2ZXJCYW5rQnJhbmNoIjoiMSIsIlJlY2VpdmVyQmFua0FjY291bnQiOiIxOTQwMTM4MjUiLCJSZWNlaXZlckJhbmtBY2NvdW50RGlnaXQiOiI2IiwiUmVjZWl2ZXJBY2NvdW50VHlwZSI6IjAiLCJUeXBlIjoiMSIsIlN0YXR1cyI6IjAiLCJQaXhLZXlWYWx1ZSI6IjMzNjMwNjYxMDAwMTUwIiwiRXh0ZXJuYWxJZGVudGlmaWVyIjpudWxsLCJSZWNlaXZlck5hbWUiOiJMYXRhbSBUZWNub2xvZ2lhIEluc3RpdHVpw6dhbyBkZSBQYWdhbWVudG8gTHRkYSIsIlJlY2VpdmVyVGF4TnVtYmVyIjoiMzM2MzA2NjEwMDAxNTAiLCJEZXNjcmlwdGlvbiI6bnVsbCwiUGF5ZXJOYW1lIjoiTUFURVVTIFJPRFJJR1VFUyIsIlBheWVyVGF4TnVtYmVyIjpudWxsLCJaaXBDb2RlIjoiODcwMTA0MzAiLCJDaXR5IjoiTWFyaW5nYSIsIk9yaWdpbmFsVmFsdWUiOiIwLjAxIiwiRXhwaXJhdGlvbkRhdGUiOm51bGwsIk9yaWdpbmFsQ3JlYXRpb25EYXRlIjoiMjAyMi0xMi0wOVQxNToyNjowNi4zNzlaIiwiVXJsIjoicXJjb2RlLWguZml0YmFuay5jb20uYnIvUVIvY29iL0REQTg5QjkxMThDQkMxNTMzMzQ1QkMwMjgxIiwiUmV1c2FibGUiOiJGYWxzZSIsIlVGIjpudWxsLCJSZWJhdGVWYWx1ZSI6bnVsbCwiRGlzY291bnRWYWx1ZSI6bnVsbCwiSW50ZXJlc3RWYWx1ZSI6bnVsbCwiRmluYWxWYWx1ZSI6bnVsbCwiRmluZVZhbHVlIjpudWxsLCJEdWVEYXRlIjpudWxsLCJEYXlzQWZ0ZXJEdWVEYXRlIjpudWxsLCJQYXltZW50RGF0ZSI6bnVsbCwiQ2F0ZWdvcnlDb2RlIjpudWxsLCJBZGRpdGlvbmFsRGF0YSI6Im51bGwiLCJQYXllclJlcXVlc3QiOm51bGwsIkV4cGlyYXRpb25RckNvZGUiOiIyNjMzNjY5IiwiUmVjZWl2ZXJUcmFkaW5nTmFtZSI6bnVsbCwiUmVjZWl2ZXJQdWJsaWNQbGFjZSI6bnVsbCwiSXNwYlBzcyI6bnVsbCwiQ2hhbmdlVHlwZSI6IjAiLCJXaXRoZHJhd1RyYW5zYWN0aW9uVmFsdWUiOm51bGwsIlRyYW5zYWN0aW9uQ2hhbmdlVHlwZSI6bnVsbCwiV2l0aGRyYXdJc3BiUHNzIjpudWxsLCJXaXRoZHJhd0FnZW50TW9kYWxpdHkiOm51bGwsIlB1cmNoYXNlV2l0aENoYW5nZVZhbHVlIjpudWxsLCJQdXJjaGFzZVdpdGhDaGFuZ2VUcmFuc2FjdGlvbkNoYW5nZVR5cGUiOm51bGwsIlB1cmNoYXNlV2l0aENoYW5nZUlzcGJQc3MiOm51bGwsIlB1cmNoYXNlV2l0aENoYW5nZUFnZW50TW9kYWxpdHkiOm51bGx9fQ==
+  recorded_at: Fri, 09 Dec 2022 15:26:49 GMT
+recorded_with: VCR 6.1.0

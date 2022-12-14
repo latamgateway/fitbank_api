@@ -27,7 +27,8 @@ module FitBankApi
       #   missing that's why we need to be careful.
       # @param body [Hash] The body of the response from FitBank
       def initialize(body)
-        super(body.fetch(:Message, 'Unknown FitBank error'))
+        message = body.fetch(:Message, 'Unknown FitBank error')
+        super("#{message}\nBody: #{body.to_json}")
         @body = body
       end
     end

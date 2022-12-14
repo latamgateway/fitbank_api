@@ -86,7 +86,7 @@ module FitBankApi
       #   for the one receiving the money. In our case this is Latam's bank info
       # @param [FitBankApi::Entities::Credentials] credentials Credentials used to
       #   access the API
-      # @param [String] pix_key The PIX key of the one receiving the money.
+      # @param [String] receiver_pix_key The PIX key of the one receiving the money.
       # @param [String] receiver_zip_code Zip Code of the city where the receiver is situtated.
       #   It is allowed to have a dash in the zip code.
       # @param [String] payer_name The name of the one sending the money. Acording to FitBank
@@ -111,15 +111,14 @@ module FitBankApi
         @get_code_by_id_url = T.let(
           URI.join(base_url, 'main/execute/GetPixQRCodeById'), URI::Generic
         )
+        @get_info_from_hash_url = T.let(
+          URI.join(base_url, 'main/execute/GetInfosPixHashCode'), URI::Generic
+        )
 
-        if CPF.valid?(payer_tax_number)
-          @payer_tax_number = T.let(CPF.new(payer_tax_number).stripped, String)
-        elsif CNPJ.valid?(payer_tax_number)
-          @payer_tax_number = T.let(CNPJ.new(payer_tax_number).stripped, String)
-        else
-          # TODO: Create custom exception
-          raise 'Invalid receiver document'
-        end
+        @payer_tax_number = T.let(
+          FitBankApi::Utils::TaxNumber.new(payer_tax_number).to_s, String
+        )
+        @base_url = base_url
         @receiver_bank_info = receiver_bank_info
         @credentials = credentials
         @receiver_pix_key = receiver_pix_key
@@ -198,6 +197,85 @@ module FitBankApi
         }
 
         FitBankApi::Utils::HTTP.post!(@get_code_by_id_url, payload, @credentials)
+      end
+
+      sig { params(hash: String).returns(T::Hash[Symbol, T.untyped]) }
+      # Retrieve data for the dynamic qr code by the hash returned from FitBankApi::Pix::DynamicQrCode#find_by_id
+      # The response contains more info (including bank details and SearchProtocol used to simulate payment in
+      # sandbox environment)
+      #
+      # Docs: https://dev.fitbank.com.br/reference/274
+      # @param [String] hash The HashCode returned from FitBankApi::Pix::DynamicQrCode#find_by_id
+      def get_info_from_hash(hash)
+        decoded_hash = Base64.decode64(hash)
+        payload = {
+          Method: 'GetInfosPixHashCode',
+          PartnerId: @credentials.partner_id,
+          BusinessUnitId: @credentials.business_unit_id,
+          Hash: decoded_hash,
+          TaxNumber: @credentials.cnpj
+        }
+
+        FitBankApi::Utils::HTTP.post!(@get_info_from_hash_url, payload, @credentials)
+      end
+
+      sig do
+        params(
+          sender_bank_info: FitBankApi::Entities::BankInfo,
+          sender_tax_number: String,
+          receiver_pix_key_info: FitBankApi::Entities::PixKeyInfo,
+          request_id: String,
+          value: BigDecimal,
+          search_protocol: T.any(Integer, String)
+        ).returns(T::Hash[Symbol, T.untyped])
+      end
+      # Simulate a payment of Dynamic QR Code in sandbox environemt. This will trigger a
+      # webhook and will change the status of the dynamic qr code to paid in FitBank's system.
+      # The steps to do it are as follows:
+      #  1. Gnerate Dynamic QR Code by calling FitBankApi::Pix::DynamicQrCode#generate
+      #  2. Take the DocumentNumber returned from FitBankApi::Pix::DynamicQrCode#generate
+      #  3. Take the HashCode returned by FitBankApi::Pix::DynamicQrCode#find_by_id
+      #  4. Take the SearchProtocol returned by FitBankApi::Pix::DynamicQrCode#get_info_from_hash
+      #  5. Make a payout by pix key with FitBankApi::Pix::Payout#by_pix_key. In the payout
+      #   the sender is the customer and the receiver is company calling the API
+      # @param [FitBankApi::Entities::BankInfo] sender_bank_info Bank info of the customer who
+      #   is paying via QRCode
+      # @param [String] sender_tax_number The CPF/CNPJ of the person/company paying the PIX via
+      #   qr code.
+      # @param [FitBankApi::Entities::PixKeyInfo] receiver_pix_key_info Pix key info generated
+      #   by FitBankApi::Pix::Key#get_info. This is the PIX key info of the one receiving the
+      #   money.
+      # @param [Strng] request_id Idempotency key for the request
+      # @param [BigDecimal] value The value of the DynamicQrCode
+      # @param [Strng, Integer] search_protocol The SearchProtocol field returned by
+      #   FitBankApi::Pix::DynamicQrCode#get_info_from_hash
+      #
+      # @note This function should be used only in sandbox environemt
+      def simulate_payment(
+        sender_bank_info:,
+        sender_tax_number:,
+        receiver_pix_key_info:,
+        request_id:,
+        value:,
+        search_protocol:
+      )
+        payout_manager = FitBankApi::Pix::Payout.new(
+          base_url: @base_url,
+          request_id: request_id,
+          receiver_bank_info: receiver_pix_key_info.bank_info,
+          sender_bank_info: sender_bank_info,
+          credentials: @credentials,
+          receiver_name: receiver_pix_key_info.name,
+          receiver_document: receiver_pix_key_info.tax_number,
+          value: value
+        )
+
+        payout_manager.by_pix_key(
+          key_info: receiver_pix_key_info,
+          search_protocol: search_protocol,
+          sender_tax_number: sender_tax_number,
+          pix_key_type: FitBankApi::Pix::Key::KeyType::TaxNumber
+        )
       end
     end
   end
