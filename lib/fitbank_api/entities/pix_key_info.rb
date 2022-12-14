@@ -12,6 +12,10 @@ module FitBankApi
       extend T::Sig
 
       const :bank_info, FitBankApi::Entities::BankInfo
+      # Sometimes the API returns null for this field. It could happen so that
+      # in two consequtive calls we get null and non null. There is no pattern
+      # to when the API could return null. We don't use this field for anything.
+      # We should investigate if it becomes required.
       const :isbp, T.nilable(String)
       const :name, String
       const :key_type, String
