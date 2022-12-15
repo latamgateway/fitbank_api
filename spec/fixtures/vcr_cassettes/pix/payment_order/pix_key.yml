@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GeneratePaymentOrder
+    body:
+      encoding: UTF-8
+      string: '{"Method":"GeneratePaymentOrder","PartnerId":1012,"BusinessUnitId":1526,"Value":50.0,"Identifier":"3aa5532f-39c3-4316-8912-78b8b3ef2cad","PaymentDate":"2022/12/15","Beneficiary":{"Name":"John
+        Doe","AccountInfo":{"TaxNumber":"17774076050","PixKey":"test_pix_key"}},"Payer":{"TaxNumber":"33630661000150","Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Host:
+      - sandboxapi.fitbank.com.br
+      Authorization:
+      - "<AUTH>"
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '87'
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 15 Dec 2022 13:12:25 GMT
+      Cache-Control:
+      - private
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnetmvc-Version:
+      - '4.0'
+      X-Aspnet-Version:
+      - 4.0.30319
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, AntiForgery, X-Requested-With, AccessToken
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 d3d6c93444f7baa05d8204eb2c6d2194.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SOF50-C1
+      X-Amz-Cf-Id:
+      - C6Ap_X6wkwwDUITd8PLySHlG9OnFmKh0x3IZ7PPRvq3Zyh74LaNxDg==
+    body:
+      encoding: UTF-8
+      string: '{"Success":"true","DocumentNumber":12623,"Message":"ISI0412 - Payment
+        order generated"}'
+  recorded_at: Thu, 15 Dec 2022 13:12:25 GMT
+recorded_with: VCR 6.1.0
