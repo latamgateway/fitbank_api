@@ -59,7 +59,7 @@ module FitBankApi
         @credentials = credentials
         @request_id = request_id
         @receiver_name = receiver_name
-        @value = value.to_f
+        @value = value
         @payment_date = payment_date
         @payment_order_url = T.let(
           URI.join(base_url, 'main/execute/GeneratePaymentOrder'), URI::Generic
@@ -67,7 +67,12 @@ module FitBankApi
         @get_payment_order_url = T.let(
           URI.join(base_url, 'main/execute/GetPaymentOrder'), URI::Generic
         )
-        @receiver_account_info = receiver_pix_key ? { PixKey: receiver_pix_key } : receiver_bank_info.to_h
+        @receiver_account_info = T.let(
+          receiver_pix_key ?
+          { PixKey: receiver_pix_key } :
+          receiver_bank_info.to_h, 
+          T::Hash[Symbol, T.untyped]
+        )
 
         if CPF.valid?(receiver_document)
           @receiver_document = T.let(CPF.new(receiver_document).stripped, String)
@@ -92,7 +97,7 @@ module FitBankApi
           Method: "GeneratePaymentOrder",
           PartnerId: @credentials.partner_id,
           BusinessUnitId: @credentials.business_unit_id,
-          Value: @value,
+          Value: @value.to_f,
           Identifier: @request_id,
           PaymentDate: @payment_date,  
           Beneficiary: {
