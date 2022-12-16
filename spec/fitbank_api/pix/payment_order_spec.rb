@@ -66,6 +66,29 @@ RSpec.describe FitBankApi::Pix::PaymentOrder do
         expect(response[:Success]).to eq('true')
         expect(response).to have_key(:DocumentNumber)
       end
-    end    
+    end
+
+    it 'gets info for created payment order' do
+      payment_order = described_class.new(
+        base_url: ENV.fetch('FITBANK_BASE_URL'),
+        request_id: SecureRandom.uuid,
+        sender_bank_info: sender_bank_info,
+        credentials: credentials,
+        receiver_name: 'John Doe',
+        receiver_document: '17774076050',
+        value: BigDecimal('50'),
+        payment_date: Time.now.strftime('%Y/%m/%d'),
+        receiver_bank_info: receiver_bank_info
+      )
+
+      VCR.use_cassette('pix/payment_order/bank_info') do
+        @document_number = payment_order.call[:DocumentNumber].to_s
+      end
+
+      VCR.use_cassette('pix/payment_order/get_by_id') do
+        response = payment_order.get_by_id(@document_number)
+        expect(response[:Success]).to eq('true')
+      end
+    end
   end
 end

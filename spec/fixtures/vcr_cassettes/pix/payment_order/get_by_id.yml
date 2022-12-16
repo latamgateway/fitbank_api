@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GetPaymentOrder
+    body:
+      encoding: UTF-8
+      string: '{"Method":"GetPaymentOrder","PartnerId":1012,"BusinessUnitId":1526,"PaymentOrderId":"12624"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Host:
+      - sandboxapi.fitbank.com.br
+      Authorization:
+      - "<AUTH>"
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '257'
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 16 Dec 2022 09:54:14 GMT
+      Cache-Control:
+      - private
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnetmvc-Version:
+      - '4.0'
+      X-Aspnet-Version:
+      - 4.0.30319
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, AntiForgery, X-Requested-With, AccessToken
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 353b8eaf90b8d7986000f2da151952bc.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - VIE50-P1
+      X-Amz-Cf-Id:
+      - s7rxeJX7xlgktkkM1No8-rdZfNCZzfY-yPEo3eoQa6WEwmoLTmAFCg==
+    body:
+      encoding: UTF-8
+      string: '{"Success":"true","PaymentOrderList":[{"PaymentOrderId":12624,"Name":"Amarillys
+        Teste Pix minha BU","TaxNumber":"17774076050","Status":"Created","PaymentDate":"2022/12/15","Type":"PIX","Identifier":"43bb93db-ddb0-4af1-80f0-26800bef990d","ReasonCode":null}]}'
+  recorded_at: Fri, 16 Dec 2022 09:54:14 GMT
+recorded_with: VCR 6.1.0
