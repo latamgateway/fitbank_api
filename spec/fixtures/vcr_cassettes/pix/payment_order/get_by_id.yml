@@ -31,7 +31,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Fri, 16 Dec 2022 09:54:14 GMT
+      - Mon, 19 Dec 2022 12:31:11 GMT
       Cache-Control:
       - private
       Server:
@@ -47,14 +47,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 353b8eaf90b8d7986000f2da151952bc.cloudfront.net (CloudFront)
+      - 1.1 ad59fd249c71e4018fca573995faa3a0.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - VIE50-P1
+      - SOF50-P1
       X-Amz-Cf-Id:
-      - s7rxeJX7xlgktkkM1No8-rdZfNCZzfY-yPEo3eoQa6WEwmoLTmAFCg==
+      - r8rsHLvXz4uwtaqlkEii_hAkw02Rebc6oS2HOOZ_GjPmxQY3GzQUBg==
     body:
       encoding: UTF-8
       string: '{"Success":"true","PaymentOrderList":[{"PaymentOrderId":12624,"Name":"Amarillys
-        Teste Pix minha BU","TaxNumber":"17774076050","Status":"Created","PaymentDate":"2022/12/15","Type":"PIX","Identifier":"43bb93db-ddb0-4af1-80f0-26800bef990d","ReasonCode":null}]}'
-  recorded_at: Fri, 16 Dec 2022 09:54:14 GMT
+        Teste Pix minha BU","TaxNumber":"17774076050","Status":"Settled","PaymentDate":"2022/12/15","Type":"PIX","Identifier":"43bb93db-ddb0-4af1-80f0-26800bef990d","ReasonCode":null}]}'
+  recorded_at: Mon, 19 Dec 2022 12:31:11 GMT
 recorded_with: VCR 6.1.0

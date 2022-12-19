@@ -126,7 +126,7 @@ module FitBankApi
           PaymentOrderId: payment_order_id
         }
 
-        FitBankApi::Utils::HTTP.post!(@get_payment_order_url, payload, @credentials)
+        FitBankApi::Utils::HTTP.post!(@get_payment_order_url, payload, @credentials).fetch(:PaymentOrderList).first
       end
     end
   end

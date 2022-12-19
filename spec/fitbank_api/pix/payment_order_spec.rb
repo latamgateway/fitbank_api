@@ -87,7 +87,7 @@ RSpec.describe FitBankApi::Pix::PaymentOrder do
 
       VCR.use_cassette('pix/payment_order/get_by_id') do
         response = payment_order.get_by_id(@document_number)
-        expect(response[:Success]).to eq('true')
+        expect(response).to have_key(:PaymentOrderId)
       end
     end
   end
