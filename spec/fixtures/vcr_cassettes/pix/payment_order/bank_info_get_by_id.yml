@@ -2,11 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://sandboxapi.fitbank.com.br/main/execute/GeneratePaymentOrder
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GetPaymentOrder
     body:
       encoding: UTF-8
-      string: '{"Method":"GeneratePaymentOrder","PartnerId":1012,"BusinessUnitId":1526,"Value":50.0,"Identifier":"43bb93db-ddb0-4af1-80f0-26800bef990d","PaymentDate":"2022/12/15","Beneficiary":{"Name":"John
-        Doe","AccountInfo":{"TaxNumber":"17774076050","Bank":"450","BankBranch":"0001","BankAccount":"182198382","BankAccountDigit":"5"}},"Payer":{"TaxNumber":"33630661000150","Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}}'
+      string: '{"Method":"GetPaymentOrder","PartnerId":1012,"BusinessUnitId":1526,"PaymentOrderId":"12711"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -28,11 +27,11 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '87'
+      - '262'
       Connection:
       - keep-alive
       Date:
-      - Thu, 15 Dec 2022 13:12:25 GMT
+      - Tue, 20 Dec 2022 08:28:58 GMT
       Cache-Control:
       - private
       Server:
@@ -48,14 +47,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 ae2c0b9c10da68dd435320c2e9c67f10.cloudfront.net (CloudFront)
+      - 1.1 ad59fd249c71e4018fca573995faa3a0.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - SOF50-C1
+      - SOF50-P1
       X-Amz-Cf-Id:
-      - VYn5yjMjuofQZpsMnoltSfsgscKgm6kWldsVjqapgu5YvAQPRk49kA==
+      - I10LV8MPWShxPAUKOgyL-uwD65lww1O6GWl4Y_cWj9r4ujynFazBDg==
     body:
       encoding: UTF-8
-      string: '{"Success":"true","DocumentNumber":12624,"Message":"ISI0412 - Payment
-        order generated"}'
-  recorded_at: Thu, 15 Dec 2022 13:12:26 GMT
+      string: '{"Success":"true","PaymentOrderList":[{"PaymentOrderId":12711,"Name":"Carlos
+        Eduardo Furquim Bezerra","TaxNumber":"03713592000187","Status":"Created","PaymentDate":"2022/12/20","Type":"PIX","Identifier":"dd8d1b6f-5c98-47c0-8017-dd48b46760a0","ReasonCode":null}]}'
+  recorded_at: Tue, 20 Dec 2022 08:28:58 GMT
 recorded_with: VCR 6.1.0

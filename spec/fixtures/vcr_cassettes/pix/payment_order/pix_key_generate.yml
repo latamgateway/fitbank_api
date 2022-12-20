@@ -5,8 +5,8 @@ http_interactions:
     uri: https://sandboxapi.fitbank.com.br/main/execute/GeneratePaymentOrder
     body:
       encoding: UTF-8
-      string: '{"Method":"GeneratePaymentOrder","PartnerId":1012,"BusinessUnitId":1526,"Value":50.0,"Identifier":"3aa5532f-39c3-4316-8912-78b8b3ef2cad","PaymentDate":"2022/12/15","Beneficiary":{"Name":"John
-        Doe","AccountInfo":{"TaxNumber":"17774076050","PixKey":"test_pix_key"}},"Payer":{"TaxNumber":"33630661000150","Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}}'
+      string: '{"Method":"GeneratePaymentOrder","PartnerId":1012,"BusinessUnitId":1526,"Value":50.0,"Identifier":"e9c9b6ae-e998-4d37-8e11-bff4755f4aaf","PaymentDate":"2022/12/20","Beneficiary":{"Name":"John
+        Doe","AccountInfo":{"TaxNumber":"03713592000187","PixKey":"03713592000187"}},"Payer":{"TaxNumber":"33630661000150","Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -32,7 +32,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Thu, 15 Dec 2022 13:12:25 GMT
+      - Tue, 20 Dec 2022 08:28:56 GMT
       Cache-Control:
       - private
       Server:
@@ -48,14 +48,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 d3d6c93444f7baa05d8204eb2c6d2194.cloudfront.net (CloudFront)
+      - 1.1 0703e22fe63b15d81692598f9fb83dfa.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - SOF50-C1
+      - SOF50-P1
       X-Amz-Cf-Id:
-      - C6Ap_X6wkwwDUITd8PLySHlG9OnFmKh0x3IZ7PPRvq3Zyh74LaNxDg==
+      - mOxK0MiymH8_j2XrFgHC81ds7urJpAAK15q0mF91ZPacHTu6Q74Kdw==
     body:
       encoding: UTF-8
-      string: '{"Success":"true","DocumentNumber":12623,"Message":"ISI0412 - Payment
+      string: '{"Success":"true","DocumentNumber":12710,"Message":"ISI0412 - Payment
         order generated"}'
-  recorded_at: Thu, 15 Dec 2022 13:12:25 GMT
+  recorded_at: Tue, 20 Dec 2022 08:28:56 GMT
 recorded_with: VCR 6.1.0

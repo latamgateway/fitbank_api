@@ -1,11 +1,8 @@
 # typed: strict
 
 require 'cpf_cnpj'
-require 'securerandom'
-require 'net/http'
 require 'date'
 require 'uri'
-require 'json'
 
 module FitBankApi
   module Pix
@@ -22,7 +19,7 @@ module FitBankApi
           receiver_name: String,
           receiver_document: String,
           value: BigDecimal,
-          payment_date: String,
+          payment_date: Date,
           receiver_pix_key: T.nilable(String),
           receiver_bank_info: T.nilable(FitBankApi::Entities::BankInfo)
         ).void
@@ -38,7 +35,7 @@ module FitBankApi
       # @param [String] receiver_name The name of the customer receiving the money
       # @param [String] receiver_document CPF/CNPJ of the customer receiving the money
       # @param [BigDecimal] value The amount of money which will be transfered
-      # @param [String] payment_date Date when the payment order will be settled; format: YYYY/MM/DD
+      # @param [Date] payment_date Date when the payment order will be settled
       # @param [String] receiver_pix_key The PIX key of the customer receiving for the money.
       #   If not present, receiver bank info will be used instead.
       # @param [FitBankApi::Entities::BankInfo] receiver_bank_info The bank info for the
@@ -60,7 +57,7 @@ module FitBankApi
         @request_id = request_id
         @receiver_name = receiver_name
         @value = value
-        @payment_date = payment_date
+        @payment_date = T.let(payment_date.strftime('%Y/%m/%d'), String)
         @payment_order_url = T.let(
           URI.join(base_url, 'main/execute/GeneratePaymentOrder'), URI::Generic
         )
@@ -79,7 +76,6 @@ module FitBankApi
         elsif CNPJ.valid?(receiver_document)
           @receiver_document = T.let(CNPJ.new(receiver_document).stripped, String)
         else
-          # TODO: Create custom exception
           raise 'Invalid receiver document'
         end
       end
@@ -89,7 +85,7 @@ module FitBankApi
       # https://dev.fitbank.com.br/docs/brazil and https://dev.fitbank.com.br/reference/442
       # @raise [FitBankApi::Errors::BaseApiError] in case of an API error
       # @raise [Net::HTTPError] if the request status was not 2xx
-      def call
+      def generate
         # All CPF/CNPJ must be stripped when using this API, no dashes, dots or slashes are
         # accepted.
         #
@@ -126,6 +122,8 @@ module FitBankApi
           PaymentOrderId: payment_order_id
         }
 
+        # The endpoint for querying PaymentOrders always returns a list, even when passing a specific
+        #   PaymentOrderId (which is unique), this is why we get the first element of the returned PaymentOrderList.
         FitBankApi::Utils::HTTP.post!(@get_payment_order_url, payload, @credentials).fetch(:PaymentOrderList).first
       end
     end

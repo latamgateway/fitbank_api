@@ -2,10 +2,11 @@
 http_interactions:
 - request:
     method: post
-    uri: https://sandboxapi.fitbank.com.br/main/execute/GetPaymentOrder
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GeneratePaymentOrder
     body:
       encoding: UTF-8
-      string: '{"Method":"GetPaymentOrder","PartnerId":1012,"BusinessUnitId":1526,"PaymentOrderId":"12624"}'
+      string: '{"Method":"GeneratePaymentOrder","PartnerId":1012,"BusinessUnitId":1526,"Value":50.0,"Identifier":"dd8d1b6f-5c98-47c0-8017-dd48b46760a0","PaymentDate":"2022/12/20","Beneficiary":{"Name":"John
+        Doe","AccountInfo":{"TaxNumber":"03713592000187","Bank":"450","BankBranch":"0001","BankAccount":"182198382","BankAccountDigit":"5"}},"Payer":{"TaxNumber":"33630661000150","Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -27,11 +28,11 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '257'
+      - '87'
       Connection:
       - keep-alive
       Date:
-      - Mon, 19 Dec 2022 12:31:11 GMT
+      - Tue, 20 Dec 2022 08:28:58 GMT
       Cache-Control:
       - private
       Server:
@@ -47,14 +48,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 ad59fd249c71e4018fca573995faa3a0.cloudfront.net (CloudFront)
+      - 1.1 711baad251a9f34ebe8773b6a43939b2.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - SOF50-P1
       X-Amz-Cf-Id:
-      - r8rsHLvXz4uwtaqlkEii_hAkw02Rebc6oS2HOOZ_GjPmxQY3GzQUBg==
+      - dYACMgVB9R4NyF1P2XgxcAoTyEwgFO-5HY5mlg5j4xOpG_p8ZLmzPw==
     body:
       encoding: UTF-8
-      string: '{"Success":"true","PaymentOrderList":[{"PaymentOrderId":12624,"Name":"Amarillys
-        Teste Pix minha BU","TaxNumber":"17774076050","Status":"Settled","PaymentDate":"2022/12/15","Type":"PIX","Identifier":"43bb93db-ddb0-4af1-80f0-26800bef990d","ReasonCode":null}]}'
-  recorded_at: Mon, 19 Dec 2022 12:31:11 GMT
+      string: '{"Success":"true","DocumentNumber":12711,"Message":"ISI0412 - Payment
+        order generated"}'
+  recorded_at: Tue, 20 Dec 2022 08:28:58 GMT
 recorded_with: VCR 6.1.0
