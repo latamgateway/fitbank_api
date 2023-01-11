@@ -66,7 +66,7 @@ RSpec.describe FitBankApi::Entities::CollectionOrderPayer do
       it 'returns the correct hash' do
         expected_hash = {
           Name: payer.name,
-          BirthDate: payer.birth_date.strftime('%Y/%m/%d'),
+          BirthDate: payer.birth_date.strftime('%Y-%m-%d'),
           Occupation: payer.occupation,
           Nationality: payer.nationality,
           Country: payer.country,

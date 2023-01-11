@@ -80,8 +80,8 @@ module FitBankApi
         expiration_date: 
       )
 
-        expiration_date_string = expiration_date.strftime('%Y/%m/%d')
-        due_date_string = (expiration_date - 1).strftime('%Y/%m/%d')
+        expiration_date_string = expiration_date.strftime('%Y-%m-%d')
+        due_date_string = (expiration_date - 1).strftime('%Y-%m-%d')
 
         payload = {
           Method: 'GenerateCollectionOrder',
@@ -107,7 +107,7 @@ module FitBankApi
                   **@receiver_bank_info.to_h
               }
           }
-      }
+        }
 
         FitBankApi::Utils::HTTP.post!(@collection_order_url, payload, @credentials)
       end

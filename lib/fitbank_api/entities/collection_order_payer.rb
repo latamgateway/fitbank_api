@@ -67,7 +67,7 @@ module FitBankApi
       def to_h
         {
           Name: @name,
-          BirthDate: @birth_date.strftime('%Y/%m/%d'),
+          BirthDate: @birth_date.strftime('%Y-%m-%d'),
           Occupation: @occupation,
           Nationality: @nationality,
           Country: @country,
