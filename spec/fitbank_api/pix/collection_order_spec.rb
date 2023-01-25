@@ -9,7 +9,6 @@ RSpec.describe FitBankApi::Pix::CollectionOrder do
     let!(:credentials) { build(:credentials) }
     let!(:receiver_pix_key) { credentials.cnpj }
     let!(:receiver_pix_key_type) { FitBankApi::Pix::Key::KeyType::TaxNumber }
-    let!(:receiver_bank_info) { build(:bank_info) }
     let!(:request_id) { SecureRandom.uuid }
     let!(:payer) { build(:collection_order_payer) }
 
@@ -19,7 +18,6 @@ RSpec.describe FitBankApi::Pix::CollectionOrder do
         receiver_name: receiver_name,
         receiver_pix_key: receiver_pix_key,
         receiver_pix_key_type: receiver_pix_key_type,
-        receiver_bank_info: receiver_bank_info,
         credentials: credentials,
         payer: payer
       )

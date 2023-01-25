@@ -16,7 +16,6 @@ module FitBankApi
           receiver_name: String,
           receiver_pix_key: String,
           receiver_pix_key_type: FitBankApi::Pix::Key::KeyType,
-          receiver_bank_info: FitBankApi::Entities::BankInfo,
           credentials: FitBankApi::Entities::Credentials,
           payer: FitBankApi::Entities::CollectionOrderPayer
         ).void
@@ -28,8 +27,6 @@ module FitBankApi
       # @param [String] receiver_pix_key The PIX key of the one receiving the money.
       # @param [FitBankApi::Pix::Key::KeyType] receiver_pix_key_type The Pix key type.
       #   See FitBankApi::Pix::Key::KeyType for more info.
-      # @param [FitBankApi::Entities::BankInfo] receiver_bank_info The bank info for the
-      #   one receiving the money.
       # @param [FitBankApi::Entities::Credentials] credentials Latam/company credentials for FitBank.
       # @param [FitBankApi::Entities::CollectionOrderPayer] payer Required information about the payer.
       def initialize(
@@ -37,7 +34,6 @@ module FitBankApi
         receiver_name: ,
         receiver_pix_key: ,
         receiver_pix_key_type: ,
-        receiver_bank_info: ,
         credentials: ,
         payer: 
       )
@@ -45,7 +41,6 @@ module FitBankApi
         @receiver_name = receiver_name
         @receiver_pix_key = receiver_pix_key
         @receiver_pix_key_type = receiver_pix_key_type
-        @receiver_bank_info = receiver_bank_info
         @credentials = credentials
         @payer = payer
 
@@ -104,7 +99,6 @@ module FitBankApi
                   PixKey: @receiver_pix_key,
                   PixKeyType: @receiver_pix_key_type.to_i,
                   TaxNumber: @credentials.cnpj,
-                  **@receiver_bank_info.to_h
               }
           }
         }
