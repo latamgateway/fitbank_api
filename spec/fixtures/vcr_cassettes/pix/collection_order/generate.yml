@@ -5,7 +5,7 @@ http_interactions:
     uri: https://sandboxapi.fitbank.com.br/main/execute/GenerateCollectionOrder
     body:
       encoding: UTF-8
-      string: '{"Method":"GenerateCollectionOrder","PartnerId":1012,"BusinessUnitId":1526,"Identifier":"2f1be0cc-3ed9-4677-ad11-a53b12aab4ef","CollectionOrderType":0,"PrincipalValue":10.0,"InterestPercent":0,"FinePercent":0,"FineDate":"2023-01-25","DueDate":"2023-01-25","ExpirationDate":"2023-01-26","Payer":{"Name":"Test
+      string: '{"Method":"GenerateCollectionOrder","PartnerId":1012,"BusinessUnitId":1526,"Identifier":"985ad9a5-a66d-4c45-84fe-e0db75be5e18","CollectionOrderType":0,"PrincipalValue":10.0,"InterestPercent":0,"FinePercent":0,"FineDate":"2023-02-02","DueDate":"2023-02-02","ExpirationDate":"2023-02-03","Payer":{"Name":"Test
         Payer","BirthDate":"2000-01-01","Occupation":"dev","Nationality":"Brasileiro","Country":"Brasil","PayerContactInfo":{"Mail":"test@test.com","Phone":"88999999999"},"PayerAccountInfo":{"TaxNumber":"88899988811"}},"Customer":{"Name":"Latam","CustomerAccountInfo":{"PixKey":"33630661000150","PixKeyType":1,"TaxNumber":"33630661000150"}}}'
     headers:
       Accept-Encoding:
@@ -32,7 +32,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Wed, 25 Jan 2023 09:18:08 GMT
+      - Thu, 02 Feb 2023 10:20:19 GMT
       Cache-Control:
       - private
       Server:
@@ -48,14 +48,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 69bd99223bbe7be5d36f0fa13d71bf84.cloudfront.net (CloudFront)
+      - 1.1 ad59fd249c71e4018fca573995faa3a0.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - SOF50-P1
       X-Amz-Cf-Id:
-      - FQaPUAxxQYziDq4Je29v9rC4EzBaP-ot_f-_nDxoKP8wgIv84u2GBw==
+      - 1v9Js8DvGImhOyU9Hjy7KPTMeU7yLgFtTKYzvScIw2mwKumKFcaLQA==
     body:
       encoding: UTF-8
-      string: '{"Success":"true","DocumentNumber":376,"Message":"ISI0485 - Collection
+      string: '{"Success":"true","DocumentNumber":586,"Message":"ISI0485 - Collection
         Order Generated"}'
-  recorded_at: Wed, 25 Jan 2023 09:18:08 GMT
-recorded_with: VCR 6.1.0
+  recorded_at: Thu, 02 Feb 2023 10:20:19 GMT
+recorded_with: VCR 6.0.0

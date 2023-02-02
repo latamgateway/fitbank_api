@@ -5,7 +5,7 @@ http_interactions:
     uri: https://sandboxapi.fitbank.com.br/main/execute/GetCollectionOrder
     body:
       encoding: UTF-8
-      string: '{"Method":"GetCollectionOrder","PartnerId":1012,"BusinessUnitId":1526,"DocumentNumber":"376"}'
+      string: '{"Method":"GetCollectionOrder","PartnerId":1012,"BusinessUnitId":1526,"DocumentNumber":"586"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -27,11 +27,11 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '340'
+      - '349'
       Connection:
       - keep-alive
       Date:
-      - Wed, 25 Jan 2023 09:18:09 GMT
+      - Thu, 02 Feb 2023 10:20:23 GMT
       Cache-Control:
       - private
       Server:
@@ -47,14 +47,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 277271973696874a01ff55ed7a25a37c.cloudfront.net (CloudFront)
+      - 1.1 711baad251a9f34ebe8773b6a43939b2.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - SOF50-P1
       X-Amz-Cf-Id:
-      - cjOaF3PtqKGMLrF5SVG4qxbKQxt1Y-77NRZHty_fdc5q5OwMd31_-g==
+      - NLmnZHriSoY7b34Y4TqIuzW-zkeC8nnN3cxGdEDaGdNd4FjFZ5AMjw==
     body:
-      encoding: UTF-8
-      string: '{"Success":"true","CollectionOrderList":[{"CollectionOrderType":0,"DocumentNumber":376,"Identifier":"2f1be0cc-3ed9-4677-ad11-a53b12aab4ef","Reason":null,"StatusDescription":"Criado","PrincipalValue":10.00,"PaymentDate":"2023-01-25","CustomerName":"
-        Latam","CustomerTaxNumber":"33630661000150","ReceiverName":null,"ReceiverTaxNumber":null}]}'
-  recorded_at: Wed, 25 Jan 2023 09:18:09 GMT
-recorded_with: VCR 6.1.0
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJTdWNjZXNzIjoidHJ1ZSIsIkNvbGxlY3Rpb25PcmRlckxpc3QiOlt7IkNvbGxlY3Rpb25PcmRlclR5cGUiOjAsIkRvY3VtZW50TnVtYmVyIjo1ODYsIklkZW50aWZpZXIiOiI5ODVhZDlhNS1hNjZkLTRjNDUtODRmZS1lMGRiNzViZTVlMTgiLCJSZWFzb24iOm51bGwsIlN0YXR1c0Rlc2NyaXB0aW9uIjoiUHLDqS1BdXRvcml6YWRvIiwiUHJpbmNpcGFsVmFsdWUiOjEwLjAwLCJQYXltZW50RGF0ZSI6IjIwMjMtMDItMDIiLCJDdXN0b21lck5hbWUiOiIgTGF0YW0iLCJDdXN0b21lclRheE51bWJlciI6IjMzNjMwNjYxMDAwMTUwIiwiUmVjZWl2ZXJOYW1lIjpudWxsLCJSZWNlaXZlclRheE51bWJlciI6bnVsbH1dfQ==
+  recorded_at: Thu, 02 Feb 2023 10:20:23 GMT
+recorded_with: VCR 6.0.0
