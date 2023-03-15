@@ -3,6 +3,7 @@
 require 'cpf_cnpj'
 require 'date'
 require 'uri'
+require 'logger'
 
 module FitBankApi
   module Pix
@@ -17,7 +18,8 @@ module FitBankApi
           receiver_pix_key: String,
           receiver_pix_key_type: FitBankApi::Pix::Key::KeyType,
           credentials: FitBankApi::Entities::Credentials,
-          payer: FitBankApi::Entities::CollectionOrderPayer
+          payer: FitBankApi::Entities::CollectionOrderPayer,
+          logger: T.untyped
         ).void
       end
       # Create a collection order API client.
@@ -29,13 +31,15 @@ module FitBankApi
       #   See FitBankApi::Pix::Key::KeyType for more info.
       # @param [FitBankApi::Entities::Credentials] credentials Latam/company credentials for FitBank.
       # @param [FitBankApi::Entities::CollectionOrderPayer] payer Required information about the payer.
+      # @param logger
       def initialize(
-        base_url: ,
-        receiver_name: ,
-        receiver_pix_key: ,
-        receiver_pix_key_type: ,
-        credentials: ,
-        payer: 
+        base_url:,
+        receiver_name:,
+        receiver_pix_key:,
+        receiver_pix_key_type:,
+        credentials:,
+        payer:,
+        logger: Logger.new($stdout)
       )
 
         @receiver_name = receiver_name
@@ -53,6 +57,7 @@ module FitBankApi
         @cancel_collection_order_url = T.let(
           URI.join(base_url, 'main/execute/CancelCollectionOrder'), URI::Generic
         )
+        @logger = logger
       end
 
       sig do
@@ -73,8 +78,8 @@ module FitBankApi
       # @raise [FitBankApi::Errors::BaseApiError] in case of an API error
       # @raise [Net::HTTPError] if the request status was not 2xx
       def generate(
-        id: ,
-        value: ,
+        id:,
+        value:,
         expiration_date: 
       )
 
@@ -106,7 +111,12 @@ module FitBankApi
           }
         }
 
-        FitBankApi::Utils::HTTP.post!(@collection_order_url, payload, @credentials)
+        FitBankApi::Utils::HTTP.post!(
+          @collection_order_url,
+          payload,
+          @credentials,
+          logger: @logger
+        )
       end
 
       sig { params(document_number: String).returns(T::Hash[Symbol, T.untyped]) }
@@ -123,7 +133,12 @@ module FitBankApi
 
         # The endpoint for querying CollectionOrders always returns a list, even when passing a specific
         #  DocumentNumber (which is unique), this is why we get the first element of the returned CollectionOrderList.
-        FitBankApi::Utils::HTTP.post!(@get_collection_order_url, payload, @credentials).fetch(:CollectionOrderList).first
+        FitBankApi::Utils::HTTP.post!(
+          @get_collection_order_url,
+          payload,
+          @credentials,
+          logger: @logger
+        ).fetch(:CollectionOrderList).first
       end
 
       sig { params(document_number: String).returns(T::Hash[Symbol, T.untyped]) }
@@ -138,7 +153,12 @@ module FitBankApi
           DocumentNumber: document_number
         }
 
-        FitBankApi::Utils::HTTP.post!(@cancel_collection_order_url, payload, @credentials)
+        FitBankApi::Utils::HTTP.post!(
+          @cancel_collection_order_url,
+          payload,
+          @credentials,
+          logger: @logger
+        )
       end
     end
   end
