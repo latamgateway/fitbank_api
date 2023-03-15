@@ -47,12 +47,12 @@ RSpec.describe FitBankApi::Pix::CollectionOrder do
       end
     end
 
-    # FitBank API not working, test commented until it does
-    # it 'cancels created collection order' do
-    #   VCR.use_cassette('pix/collection_order/cancel_by_id') do
-    #     cancel_response = collection_order_api.cancel_by_id(@response.fetch(:DocumentNumber).to_s)
-    #     expect(cancel_response.fetch(:Success)).to eq('true')
-    #   end
-    # end
+    # FitBank API not working, test ignored until it does
+    xit 'cancels created collection order' do
+      VCR.use_cassette('pix/collection_order/cancel_by_id') do
+        cancel_response = collection_order_api.cancel_by_id(@response.fetch(:DocumentNumber).to_s)
+        expect(cancel_response.fetch(:Success)).to eq('true')
+      end
+    end
   end
 end
