@@ -105,7 +105,7 @@ module FitBankApi
               Name: @receiver_name,
               CustomerAccountInfo: {
                   PixKey: @receiver_pix_key,
-                  PixKeyType: Integer(@receiver_pix_key_type),
+                  PixKeyType: @receiver_pix_key_type.to_i,
                   TaxNumber: @credentials.cnpj,
               }
           }
