@@ -10,6 +10,7 @@ RSpec.describe FitBankApi::Pix::CollectionOrder do
     let(:receiver_pix_key)      { credentials.cnpj                         }
     let(:receiver_pix_key_type) { FitBankApi::Pix::Key::KeyType::TaxNumber }
     let(:payer)                 { build(:collection_order_payer)           }
+    let(:bank_info)             { build(:bank_info)                        }
 
     let(:collection_order_api) do
       described_class.new(
@@ -18,7 +19,8 @@ RSpec.describe FitBankApi::Pix::CollectionOrder do
         receiver_pix_key: receiver_pix_key,
         receiver_pix_key_type: receiver_pix_key_type,
         credentials: credentials,
-        payer: payer
+        payer: payer,
+        beneficiary_bank_info: bank_info
       )
     end
 

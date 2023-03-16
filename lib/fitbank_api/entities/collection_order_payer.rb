@@ -38,16 +38,15 @@ module FitBankApi
       # @param [String] occupation Occupation of the payer.
       # @param [String] nationality Nationality of the payer.
       # @param [String] country Country of residence of the payer.
-
       def initialize(
-        name: ,
-        birth_date: ,
-        tax_number: ,
-        email: ,
-        mobile: ,
-        occupation: "",
-        nationality: "",
-        country: ""
+        name:,
+        birth_date:,
+        tax_number:,
+        email:,
+        mobile:,
+        occupation: '',
+        nationality: '',
+        country: ''
       )
 
         @name = name

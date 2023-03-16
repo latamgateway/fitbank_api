@@ -19,6 +19,7 @@ module FitBankApi
           receiver_pix_key_type: FitBankApi::Pix::Key::KeyType,
           credentials: FitBankApi::Entities::Credentials,
           payer: FitBankApi::Entities::CollectionOrderPayer,
+          beneficiary_bank_info: FitBankApi::Entities::BankInfo,
           logger: T.untyped
         ).void
       end
@@ -31,6 +32,8 @@ module FitBankApi
       #   See FitBankApi::Pix::Key::KeyType for more info.
       # @param [FitBankApi::Entities::Credentials] credentials Latam/company credentials for FitBank.
       # @param [FitBankApi::Entities::CollectionOrderPayer] payer Required information about the payer.
+      # @param [FitBankApi::Entities::BankInfk] beneficiery_bank_info Bank information of the one who
+      #   will gather the money.
       # @param logger
       def initialize(
         base_url:,
@@ -39,6 +42,7 @@ module FitBankApi
         receiver_pix_key_type:,
         credentials:,
         payer:,
+        beneficiary_bank_info:,
         logger: Logger.new($stdout)
       )
 
@@ -47,6 +51,7 @@ module FitBankApi
         @receiver_pix_key_type = receiver_pix_key_type
         @credentials = credentials
         @payer = payer
+        @beneficiary_bank_info = beneficiary_bank_info
 
         @collection_order_url = T.let(
           URI.join(base_url, 'main/execute/GenerateCollectionOrder'), URI::Generic
@@ -80,7 +85,7 @@ module FitBankApi
       def generate(
         id:,
         value:,
-        expiration_date: 
+        expiration_date:
       )
 
         due_date_string = (expiration_date - 1).strftime('%Y-%m-%d')
@@ -103,12 +108,16 @@ module FitBankApi
           FineDate: fine_date_string,
           Payer: @payer.to_h,
           Customer: {
-              Name: @receiver_name,
-              CustomerAccountInfo: {
-                  PixKey: @receiver_pix_key,
-                  PixKeyType: @receiver_pix_key_type.to_i,
-                  TaxNumber: @credentials.cnpj,
-              }
+            Name: @receiver_name,
+            CustomerAccountInfo: {
+              PixKey: @receiver_pix_key,
+              PixKeyType: @receiver_pix_key_type.to_i,
+              TaxNumber: @credentials.cnpj,
+              Bank: @beneficiary_bank_info.bank_code,
+              BankBranch: @beneficiary_bank_info.bank_agency,
+              BankAccount: @beneficiary_bank_info.bank_account,
+              BankAccountDigit: @beneficiary_bank_info.bank_account_digit
+            }
           }
         }
 
