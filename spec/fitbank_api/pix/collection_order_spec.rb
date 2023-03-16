@@ -24,7 +24,7 @@ RSpec.describe FitBankApi::Pix::CollectionOrder do
 
     let(:value) { BigDecimal(10) }
     let(:id) { SecureRandom.uuid }
-    let(:expiration_date) { Time.now.to_date + 1 }
+    let(:expiration_date) { Date.today + 1 }
 
     before do
       VCR.use_cassette('pix/collection_order/generate') do

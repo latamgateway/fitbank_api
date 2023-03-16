@@ -93,7 +93,7 @@ module FitBankApi
           Identifier: id,
           # CollectionOrderType enum: 0 - Pix with QR Code, 1 - Boleto, 2 - Both; We only use the Pix QR Code
           CollectionOrderType: 0,
-          PrincipalValue: value.to_f,
+          PrincipalValue: Float(value),
           # Fines and interest hardcoded to 0 as the feature is not used at the moment
           InterestPercent: 0,
           FinePercent: 0,
@@ -105,7 +105,7 @@ module FitBankApi
               Name: @receiver_name,
               CustomerAccountInfo: {
                   PixKey: @receiver_pix_key,
-                  PixKeyType: @receiver_pix_key_type.to_i,
+                  PixKeyType: Integer(@receiver_pix_key_type),
                   TaxNumber: @credentials.cnpj,
               }
           }
