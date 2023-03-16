@@ -5,11 +5,11 @@ require 'date'
 
 RSpec.describe FitBankApi::Pix::CollectionOrder do
   describe 'collection order' do
-    let(:receiver_name) { 'Latam' }
-    let(:credentials) { build(:credentials) }
-    let(:receiver_pix_key) { credentials.cnpj }
+    let(:receiver_name)         { 'Latam'                                  }
+    let(:credentials)           { build(:credentials)                      }
+    let(:receiver_pix_key)      { credentials.cnpj                         }
     let(:receiver_pix_key_type) { FitBankApi::Pix::Key::KeyType::TaxNumber }
-    let(:payer) { build(:collection_order_payer) }
+    let(:payer)                 { build(:collection_order_payer)           }
 
     let(:collection_order_api) do
       described_class.new(
@@ -22,9 +22,9 @@ RSpec.describe FitBankApi::Pix::CollectionOrder do
       )
     end
 
-    let(:value) { BigDecimal(10) }
-    let(:id) { SecureRandom.uuid }
-    let(:expiration_date) { Date.today + 1 }
+    let(:value)           { BigDecimal(10)    }
+    let(:id)              { SecureRandom.uuid }
+    let(:expiration_date) { Date.today + 1    }
 
     before do
       VCR.use_cassette('pix/collection_order/generate') do

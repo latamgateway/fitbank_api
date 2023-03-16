@@ -83,8 +83,9 @@ module FitBankApi
         expiration_date: 
       )
 
-        expiration_date_string = expiration_date.strftime('%Y-%m-%d')
         due_date_string = (expiration_date - 1).strftime('%Y-%m-%d')
+        expiration_date_string = expiration_date.strftime('%Y-%m-%d')
+        fine_date_string = (expiration_date + 1).strftime('%Y-%m-%d')
 
         payload = {
           Method: 'GenerateCollectionOrder',
@@ -97,9 +98,9 @@ module FitBankApi
           # Fines and interest hardcoded to 0 as the feature is not used at the moment
           InterestPercent: 0,
           FinePercent: 0,
-          FineDate: due_date_string,
           DueDate: due_date_string,
           ExpirationDate: expiration_date_string,
+          FineDate: fine_date_string,
           Payer: @payer.to_h,
           Customer: {
               Name: @receiver_name,
