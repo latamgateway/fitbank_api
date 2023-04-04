@@ -11,6 +11,13 @@ module FitBankApi
     class CollectionOrder
       extend T::Sig
 
+      TYPE = {
+        pix_static_qr_code: 0,
+        boleto: 1,
+        pix_and_boleto: 2,
+        pix_dynamic_qr_code: 3
+      }.freeze
+
       sig do
         params(
           base_url: String,
@@ -97,10 +104,9 @@ module FitBankApi
           PartnerId: @credentials.partner_id,
           BusinessUnitId: @credentials.business_unit_id,
           Identifier: id,
-          # CollectionOrderType enum: 0 - Pix with QR Code, 1 - Boleto, 2 - Both; We only use the Pix QR Code
-          CollectionOrderType: 0,
+          CollectionOrderType: TYPE[:pix_dynamic_qr_code],
           PrincipalValue: Float(value),
-          # Fines and interest hardcoded to 0 as the feature is not used at the moment
+          # Interest and Fine always gonna be 0
           InterestPercent: 0,
           FinePercent: 0,
           DueDate: due_date_string,
