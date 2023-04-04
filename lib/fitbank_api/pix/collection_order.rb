@@ -11,12 +11,12 @@ module FitBankApi
     class CollectionOrder
       extend T::Sig
 
-      TYPE = {
+      TYPE = T.let({
         pix_static_qr_code: 0,
         boleto: 1,
         pix_and_boleto: 2,
         pix_dynamic_qr_code: 3
-      }.freeze
+      }.freeze, T::Hash[Symbol, Integer])
 
       sig do
         params(
