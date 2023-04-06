@@ -11,6 +11,29 @@ module FitBankApi
     class CollectionOrder
       extend T::Sig
 
+      class Type < T::Enum
+        extend T::Sig
+
+        enums do
+          PixStaticQrCode = new
+          Boleto = new
+          PixAndBoleto = new
+          PixDynamicQrCode = new
+        end
+
+        sig { returns(Integer) }
+        def to_i
+          case self
+          when PixStaticQrCode then 0
+          when Boleto then 1
+          when PixAndBoleto then 2
+          when PixDynamicQrCode then 3
+          else
+            T.absurd(self)
+          end
+        end
+      end
+
       sig do
         params(
           base_url: String,
@@ -20,6 +43,7 @@ module FitBankApi
           credentials: FitBankApi::Entities::Credentials,
           payer: FitBankApi::Entities::CollectionOrderPayer,
           beneficiary_bank_info: FitBankApi::Entities::BankInfo,
+          collection_order_type: FitBankApi::Pix::CollectionOrder::Type,
           logger: T.untyped
         ).void
       end
@@ -32,8 +56,9 @@ module FitBankApi
       #   See FitBankApi::Pix::Key::KeyType for more info.
       # @param [FitBankApi::Entities::Credentials] credentials Latam/company credentials for FitBank.
       # @param [FitBankApi::Entities::CollectionOrderPayer] payer Required information about the payer.
-      # @param [FitBankApi::Entities::BankInfk] beneficiery_bank_info Bank information of the one who
+      # @param [FitBankApi::Entities::BankInfo] beneficiery_bank_info Bank information of the one who
       #   will gather the money.
+      # @param [FitBankApi::Pix::CollectionOrder::Type] collection_order_type Type of the Collection Order (see enum Type)
       # @param logger
       def initialize(
         base_url:,
@@ -43,6 +68,7 @@ module FitBankApi
         credentials:,
         payer:,
         beneficiary_bank_info:,
+        collection_order_type: FitBankApi::Pix::CollectionOrder::Type::PixDynamicQrCode,
         logger: Logger.new($stdout)
       )
 
@@ -52,6 +78,7 @@ module FitBankApi
         @credentials = credentials
         @payer = payer
         @beneficiary_bank_info = beneficiary_bank_info
+        @collection_order_type = collection_order_type
 
         @collection_order_url = T.let(
           URI.join(base_url, 'main/execute/GenerateCollectionOrder'), URI::Generic
@@ -97,10 +124,9 @@ module FitBankApi
           PartnerId: @credentials.partner_id,
           BusinessUnitId: @credentials.business_unit_id,
           Identifier: id,
-          # CollectionOrderType enum: 0 - Pix with QR Code, 1 - Boleto, 2 - Both; We only use the Pix QR Code
-          CollectionOrderType: 0,
+          CollectionOrderType: @collection_order_type.to_i,
           PrincipalValue: Float(value),
-          # Fines and interest hardcoded to 0 as the feature is not used at the moment
+          # Interest and Fine always gonna be 0
           InterestPercent: 0,
           FinePercent: 0,
           DueDate: due_date_string,
