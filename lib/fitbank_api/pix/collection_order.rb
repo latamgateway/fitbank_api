@@ -58,8 +58,7 @@ module FitBankApi
       # @param [FitBankApi::Entities::CollectionOrderPayer] payer Required information about the payer.
       # @param [FitBankApi::Entities::BankInfo] beneficiery_bank_info Bank information of the one who
       #   will gather the money.
-      # @param [FitBankApi::Pix::CollectionOrder::Type] beneficiery_bank_info Bank information of the one who
-      #   will gather the money.
+      # @param [FitBankApi::Pix::CollectionOrder::Type] collection_order_type Type of the Collection Order (see enum Type)
       # @param logger
       def initialize(
         base_url:,
