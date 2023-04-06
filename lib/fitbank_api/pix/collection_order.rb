@@ -11,12 +11,28 @@ module FitBankApi
     class CollectionOrder
       extend T::Sig
 
-      TYPE = T.let({
-        pix_static_qr_code: 0,
-        boleto: 1,
-        pix_and_boleto: 2,
-        pix_dynamic_qr_code: 3
-      }.freeze, T::Hash[Symbol, Integer])
+      class Type < T::Enum
+        extend T::Sig
+
+        enums do
+          PixStaticQrCode = new
+          Boleto = new
+          PixAndBoleto = new
+          PixDynamicQrCode = new
+        end
+
+        sig { returns(Integer) }
+        def to_i
+          case self
+          when PixStaticQrCode then 0
+          when Boleto then 1
+          when PixAndBoleto then 2
+          when PixDynamicQrCode then 3
+          else
+            T.absurd(self)
+          end
+        end
+      end
 
       sig do
         params(
@@ -27,6 +43,7 @@ module FitBankApi
           credentials: FitBankApi::Entities::Credentials,
           payer: FitBankApi::Entities::CollectionOrderPayer,
           beneficiary_bank_info: FitBankApi::Entities::BankInfo,
+          collection_order_type: FitBankApi::Pix::CollectionOrder::Type,
           logger: T.untyped
         ).void
       end
@@ -39,7 +56,9 @@ module FitBankApi
       #   See FitBankApi::Pix::Key::KeyType for more info.
       # @param [FitBankApi::Entities::Credentials] credentials Latam/company credentials for FitBank.
       # @param [FitBankApi::Entities::CollectionOrderPayer] payer Required information about the payer.
-      # @param [FitBankApi::Entities::BankInfk] beneficiery_bank_info Bank information of the one who
+      # @param [FitBankApi::Entities::BankInfo] beneficiery_bank_info Bank information of the one who
+      #   will gather the money.
+      # @param [FitBankApi::Pix::CollectionOrder::Type] beneficiery_bank_info Bank information of the one who
       #   will gather the money.
       # @param logger
       def initialize(
@@ -50,6 +69,7 @@ module FitBankApi
         credentials:,
         payer:,
         beneficiary_bank_info:,
+        collection_order_type: FitBankApi::Pix::CollectionOrder::Type::PixDynamicQrCode,
         logger: Logger.new($stdout)
       )
 
@@ -59,6 +79,7 @@ module FitBankApi
         @credentials = credentials
         @payer = payer
         @beneficiary_bank_info = beneficiary_bank_info
+        @collection_order_type = collection_order_type
 
         @collection_order_url = T.let(
           URI.join(base_url, 'main/execute/GenerateCollectionOrder'), URI::Generic
@@ -104,7 +125,7 @@ module FitBankApi
           PartnerId: @credentials.partner_id,
           BusinessUnitId: @credentials.business_unit_id,
           Identifier: id,
-          CollectionOrderType: TYPE[:pix_dynamic_qr_code],
+          CollectionOrderType: @collection_order_type.to_i,
           PrincipalValue: Float(value),
           # Interest and Fine always gonna be 0
           InterestPercent: 0,
