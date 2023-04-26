@@ -82,5 +82,28 @@ RSpec.describe FitBankApi::Entities::CollectionOrderPayer do
         expect(payer.to_h).to eq(expected_hash)
       end
     end
+    
+    context 'birth date - nil' do
+      it 'accept birth date nil' do
+        expected_hash = {
+          Name: payer.name,
+          BirthDate: nil,
+          Occupation: payer.occupation,
+          Nationality: payer.nationality,
+          Country: payer.country,
+          PayerContactInfo: {
+            Mail: payer.email,
+            Phone: payer.mobile
+          },
+          PayerAccountInfo: {
+            TaxNumber: payer.tax_number
+          }
+        }
+
+        payer.birth_date = nil
+
+        expect(payer.to_h).to eq(expected_hash)
+      end
+    end
   end
 end

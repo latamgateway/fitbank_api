@@ -1,4 +1,4 @@
-# typed: strict
+# # typed: strict
 # frozen_string_literal: true
 
 require 'date'
@@ -12,13 +12,13 @@ module FitBankApi
       sig { returns(String) }
       attr_accessor :name, :tax_number, :email, :mobile, :occupation, :nationality, :country
 
-      sig { returns(Date) }
+      sig { returns(T.nilable(Date)) }
       attr_accessor :birth_date
 
       sig do
         params(
           name: String,
-          birth_date: Date,
+          birth_date: T.nilable(Date),
           tax_number: String,
           email: String,
           mobile: String,
@@ -66,7 +66,7 @@ module FitBankApi
       def to_h
         {
           Name: @name,
-          BirthDate: @birth_date.strftime('%Y-%m-%d'),
+          BirthDate: @birth_date&.strftime('%Y-%m-%d'),
           Occupation: @occupation,
           Nationality: @nationality,
           Country: @country,
