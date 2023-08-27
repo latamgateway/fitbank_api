@@ -1,5 +1,7 @@
 *.swp
 *.swo
+*.swn
+*.swm
 bin/
 *.gem
 sorbet/
@@ -9,3 +11,4 @@ doc/
 .byebug_history
 
 .env.test.local
+.env.local

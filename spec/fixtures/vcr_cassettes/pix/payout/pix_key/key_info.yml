@@ -2,11 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://sandboxapi.fitbank.com.br/main/execute/GenerateDynamicPixQRCode
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GetInfosPixKey
     body:
       encoding: UTF-8
-      string: '{"Method":"GenerateDynamicPixQRCode","PartnerId":1012,"BusinessUnitId":1526,"PixKey":"33630661000150","TaxNumber":"33630661000150","PrincipalValue":"20.0","ExpirationDate":"2023/01/08","Identifier":"3534c926-4c8e-46e2-b502-0b4225e15f58","Address":{"ZipCode":"87010430"},"ChangeType":0,"TransactionPurpose":0,"AgentModality":2,"TransactionValue":null,"TransactionChangeType":null,"PayerName":"MATEUS
-        RODRIGUES BARROSO DOS SANTOS","PayerTaxNumber":"07890396309","Bank":"450","BankBranch":"0001","BankAccount":"194013825","BankAccountDigit":"6"}'
+      string: '{"Method":"GetInfosPixKey","PartnerId":1012,"BusinessUnitId":1526,"PixKey":"03713592000187","PixKeyType":1,"TaxNumber":"03713592000187"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -28,11 +27,11 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '93'
+      - '400'
       Connection:
       - keep-alive
       Date:
-      - Fri, 09 Dec 2022 16:43:34 GMT
+      - Tue, 29 Nov 2022 16:05:08 GMT
       Cache-Control:
       - private
       Server:
@@ -48,14 +47,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 3dd1b09eec76c0aa4f9a7b74344d67b2.cloudfront.net (CloudFront)
+      - 1.1 b71ecd1018f21aabbfe290f634d31212.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - SOF50-C1
       X-Amz-Cf-Id:
-      - Uc7jxbzZWAomWsu1jumTgZo30zRdpfXCQlyyINeldSvFGAK6JUqO5A==
+      - hsphh63SSeqTjBMEEM88-FdX5WqxhCqIUmhqeYeFthtETVtYHQnd9g==
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJEb2N1bWVudE51bWJlciI6MTMzODl9
-  recorded_at: Fri, 09 Dec 2022 16:43:35 GMT
+        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJJU0kwMDAxIC0gTcOpdG9kbyBleGVjdXRhZG8gY29tIHN1Y2Vzc28iLCJTZWFyY2hQcm90b2NvbCI6MTUwMTY2LCJJbmZvcyI6eyJSZWNlaXZlck5hbWUiOiJDYXJsb3MgRWR1YXJkbyBGdXJxdWltIEJlemVycmEiLCJSZWNlaXZlcklTUEIiOiIxMzIwMzM1NCIsIlJlY2VpdmVyQmFuayI6IjQ1MCIsIlJlY2VpdmVyQmFua0JyYW5jaCI6IjEiLCJSZWNlaXZlckJhbmtBY2NvdW50IjoiMTkzNDY4ODQxIiwiUmVjZWl2ZXJCYW5rQWNjb3VudERpZ2l0IjoiMyIsIlJlY2VpdmVyQWNjb3VudFR5cGUiOiIwIiwiUGl4S2V5VHlwZSI6IjEiLCJQaXhLZXlWYWx1ZSI6IjAzNzEzNTkyMDAwMTg3IiwiUmVjZWl2ZXJUYXhOdW1iZXIiOiIwMzcxMzU5MjAwMDE4NyJ9fQ==
+  recorded_at: Tue, 29 Nov 2022 16:05:08 GMT
 recorded_with: VCR 6.1.0

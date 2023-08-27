@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GeneratePixOut
+    body:
+      encoding: UTF-8
+      string: '{"Method":"GeneratePixOut","PartnerId":1012,"BusinessUnitId":1526,"TaxNumber":"07890396309","ToTaxNumber":"33630661000150","ToName":"Latam
+        Tecnologia Instituiçao de Pagamento Ltda","ToBank":"450","ToBankBranch":"0001","ToBankAccount":"194013825","ToBankAccountDigit":"6","AccountType":"0","Value":"0.01","RateValue":0,"RateValueType":0,"Identifier":"bf827b17-6fa0-4b61-9ccd-42f3530bbfd3","Tags":[],"PaymentDate":"2022/12/09","PixKey":"33630661000150","PixKeyType":1,"SearchProtocol":150561,"Description":"Transfer","CustomerMessage":"Transfer","OnlineTransfer":true,"AgentModality":2,"TransactionPurpose":0,"Bank":"450","BankBranch":"0001","BankAccount":"199392157","BankAccountDigit":"3"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Host:
+      - sandboxapi.fitbank.com.br
+      Authorization:
+      - "<AUTH>"
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '200'
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 09 Dec 2022 15:27:58 GMT
+      Cache-Control:
+      - private
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnetmvc-Version:
+      - '4.0'
+      X-Aspnet-Version:
+      - 4.0.30319
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, AntiForgery, X-Requested-With, AccessToken
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 83d0137377604ae8e59d0712f3ef6fe2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - CDG50-P4
+      X-Amz-Cf-Id:
+      - BPuVQjbJDfbvyKf65XiQvnrTEKhG_fTjxf8LN_neHmhVK38M5Qo8rA==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJTdWNjZXNzIjoidHJ1ZSIsIk1lc3NhZ2UiOiJTb2xpY2l0YcOnw6NvIHBhcmEgcGFnYW1lbnRvIFBJWCByZWNlYmlkYSBjb20gc3VjZXNzby4iLCJEb2N1bWVudE51bWJlciI6NTAzNDM1LCJVcmwiOiJodHRwczovL3NhbmRib3hyZWNlaXB0LmZpdGJhbmsuY29tLmJyL3JlY2VpcHQvcGRmP2ZpbGVuYW1lPTIwMjItMTItMDkvemEwcGxibGMucGRmIn0=
+  recorded_at: Fri, 09 Dec 2022 15:27:58 GMT
+recorded_with: VCR 6.1.0
