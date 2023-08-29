@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fitbank_api (0.6.3)
+    fitbank_api (0.7.0)
       cpf_cnpj
       sorbet-runtime
 
