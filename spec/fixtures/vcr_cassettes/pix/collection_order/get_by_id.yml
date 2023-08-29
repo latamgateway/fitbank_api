@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandboxapi.fitbank.com.br/main/execute/GetCollectionOrder
+    body:
+      encoding: UTF-8
+      string: '{"Method":"GetCollectionOrder","PartnerId":1012,"BusinessUnitId":1526,"DocumentNumber":"586"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Host:
+      - sandboxapi.fitbank.com.br
+      Authorization:
+      - "<AUTH>"
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '349'
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 02 Feb 2023 10:20:23 GMT
+      Cache-Control:
+      - private
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnetmvc-Version:
+      - '4.0'
+      X-Aspnet-Version:
+      - 4.0.30319
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, AntiForgery, X-Requested-With, AccessToken
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 711baad251a9f34ebe8773b6a43939b2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SOF50-P1
+      X-Amz-Cf-Id:
+      - NLmnZHriSoY7b34Y4TqIuzW-zkeC8nnN3cxGdEDaGdNd4FjFZ5AMjw==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJTdWNjZXNzIjoidHJ1ZSIsIkNvbGxlY3Rpb25PcmRlckxpc3QiOlt7IkNvbGxlY3Rpb25PcmRlclR5cGUiOjAsIkRvY3VtZW50TnVtYmVyIjo1ODYsIklkZW50aWZpZXIiOiI5ODVhZDlhNS1hNjZkLTRjNDUtODRmZS1lMGRiNzViZTVlMTgiLCJSZWFzb24iOm51bGwsIlN0YXR1c0Rlc2NyaXB0aW9uIjoiUHLDqS1BdXRvcml6YWRvIiwiUHJpbmNpcGFsVmFsdWUiOjEwLjAwLCJQYXltZW50RGF0ZSI6IjIwMjMtMDItMDIiLCJDdXN0b21lck5hbWUiOiIgTGF0YW0iLCJDdXN0b21lclRheE51bWJlciI6IjMzNjMwNjYxMDAwMTUwIiwiUmVjZWl2ZXJOYW1lIjpudWxsLCJSZWNlaXZlclRheE51bWJlciI6bnVsbH1dfQ==
+  recorded_at: Thu, 02 Feb 2023 10:20:23 GMT
+recorded_with: VCR 6.0.0

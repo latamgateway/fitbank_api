@@ -1,5 +1,5 @@
 # typed: strict
 module FitBankApi
-  VERSION = '0.5.0'
+  VERSION = '0.6.3'
 end
 
