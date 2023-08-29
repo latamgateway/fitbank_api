@@ -1,3 +1,6 @@
+# typed: strict
+# frozen_string_literal: true
+
 module FitBankApi
   module Pix
     # Wrapper for FitBank API used for performing PixIn refund and getting refund details
