@@ -12,8 +12,7 @@ module FitBankApi
         params(
           base_url: String,
           company_bank_info: FitBankApi::Entities::BankInfo,
-          credentials: FitBankApi::Entities::Credentials,
-          e2e_id: String
+          credentials: FitBankApi::Entities::Credentials
         ).void
       end
       # @param [String] base_url The base URL of the API, defining whether prod
@@ -25,8 +24,7 @@ module FitBankApi
       def initialize(
         base_url: ,
         company_bank_info: ,
-        credentials: ,
-        e2e_id: 
+        credentials: 
       )
         @company_bank_info = company_bank_info
         @credentials = credentials
