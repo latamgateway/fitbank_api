@@ -63,7 +63,6 @@ module FitBankApi
         elsif CNPJ.valid?(receiver_document)
           @receiver_document = T.let(CNPJ.new(receiver_document).stripped, String)
         else
-          # TODO: Create custom exception
           raise 'Invalid receiver document'
         end
       end
