@@ -4,7 +4,7 @@
 module FitBankApi
   module Pix
     # Wrapper for FitBank API used for querying PixIn receipts
-    # Docs - https://dev.fitbank.com.br/reference/240 - GenerateRefundPixIn; https://dev.fitbank.com.br/reference/335 - GetRefundPixInById
+    # Docs - https://dev.fitbank.com.br/reference/480 - GetPixInById;
     class Receipt
       extend T::Sig
 
@@ -16,7 +16,6 @@ module FitBankApi
           e2e_id: String
         ).void
       end
-      # Request a refund for a PIX PayIn
       # @param [String] base_url The base URL of the API, defining whether prod
       #   or sandbox environemt is used
       # @param [FitBankApi::Entities::BankInfo] company_bank_info The bank info for the company.
@@ -37,7 +36,7 @@ module FitBankApi
         )
       end
 
-      sig { params(id: String).returns(T::Hash[Symbol, T.untyped]) }
+      sig { params(e2e_id: String).returns(T::Hash[Symbol, T.untyped]) }
       # https://dev.fitbank.com.br/reference/480
       # @param [String] e2e_id End-To-End ID sent in the webhook on successful payment
       def get_by_e2e_id(e2e_id)
