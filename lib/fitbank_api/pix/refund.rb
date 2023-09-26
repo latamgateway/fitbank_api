@@ -111,7 +111,7 @@ module FitBankApi
           Method: "GetRefundPixInById",
           PartnerId: @credentials.partner_id,
           BusinessUnitId: @credentials.business_unit_id,
-          DocumentNumber: id,
+          DocumentNumber: Integer(id),
           TaxNumber: @credentials.cnpj
         }.merge(@sender_bank_info.to_h)
 
