@@ -23,6 +23,7 @@ GEM
     crack (0.4.5)
       rexml
     diff-lcs (1.5.0)
+    docile (1.4.0)
     dotenv (2.8.1)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -61,6 +62,12 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
     rspec-support (3.11.1)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     sorbet (0.5.10426)
       sorbet-static (= 0.5.10426)
     sorbet-runtime (0.5.10426)
@@ -111,6 +118,7 @@ DEPENDENCIES
   fitbank_api!
   pry-byebug
   rspec
+  simplecov
   sorbet-static
   tapioca
   vcr
