@@ -21,17 +21,12 @@ module FitBankApi
       #   company refunding the money
       # @param [FitBankApi::Entities::Credentials] credentials Company credentials for FitBank
 
-      def initialize(
-        base_url: ,
-        company_bank_info: ,
-        credentials: 
-      )
+      def initialize(base_url:, company_bank_info:, credentials:)
         @company_bank_info = company_bank_info
         @credentials = credentials
 
-        @get_by_id_url = T.let(
-          URI.join(base_url, 'main/execute/GetPixInById'), URI::Generic
-        )
+        @get_by_id_url =
+          T.let(URI.join(base_url, "main/execute/GetPixInById"), URI::Generic)
       end
 
       sig { params(e2e_id: String).returns(T::Hash[Symbol, T.untyped]) }
