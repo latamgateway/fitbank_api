@@ -1,21 +1,25 @@
----
-name: Test
+name: CI
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
-  workflow_call:
-  workflow_dispatch:
 
 jobs:
   test:
-    uses: latamgateway/ruby-linters-latam/.github/workflows/rspec.yml@0.1.0
+    uses: latamgateway/ruby-linters-latam/.github/workflows/rspec.yml@main
+  lint:
+    uses: latamgateway/ruby-linters-latam/.github/workflows/lint.yml@main
+  review:
+    uses: latamgateway/ruby-linters-latam/.github/workflows/review.yml@review
 
   type-check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['2.7.6']
+        ruby-version: ["2.7.6"]
     steps:
       - uses: actions/checkout@v3
 
