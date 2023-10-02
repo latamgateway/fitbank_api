@@ -39,7 +39,7 @@ RSpec.describe FitBankApi::Pix::Refund do
       ).to_return(
         body: {
           Success: "true",
-          Message: "ISI0001 - Método executado com sucesso",
+          Message: "ISI0001 - Método executado com sucesso", # nosemgrep
           Url: "http://www.pdfurl.com.br/pdf?filename=2022-03-29/0uws2git.pdf",
           DocumentNumber: 854_127,
           AlreadyExists: "False"
