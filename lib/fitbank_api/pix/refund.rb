@@ -22,7 +22,6 @@ module FitBankApi
       # @param [FitBankApi::Entities::BankInfo] sender_bank_info The bank info for the
       # company refunding the money
       # @param [FitBankApi::Entities::Credentials] credentials Company credentials for FitBank
-
       def initialize(base_url:, sender_bank_info:, credentials:)
         @sender_bank_info = sender_bank_info
         @credentials = credentials
