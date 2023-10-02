@@ -16,9 +16,9 @@ module FitBankApi
         ).void
       end
       # @param [String] base_url The base URL of the API, defining whether prod
-      #   or sandbox environemt is used
+      # or sandbox environemt is used
       # @param [FitBankApi::Entities::BankInfo] company_bank_info The bank info for the company.
-      #   company refunding the money
+      # company refunding the money
       # @param [FitBankApi::Entities::Credentials] credentials Company credentials for FitBank
 
       def initialize(base_url:, company_bank_info:, credentials:)
