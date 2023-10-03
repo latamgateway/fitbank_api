@@ -13,3 +13,5 @@ doc/
 .env.test.local
 .env.local
 tags
+
+/coverage/

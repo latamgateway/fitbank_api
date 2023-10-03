@@ -1,5 +1,8 @@
 # typed: strict
+
+require 'sorbet-runtime'
+
 module FitBankApi
-  VERSION = '0.6.3'
+  VERSION = T.let('0.7.2'.freeze, String)
 end
 

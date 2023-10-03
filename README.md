@@ -1,3 +1,5 @@
+[![CI](https://github.com/latamgateway/fitbank_api/actions/workflows/ci.yml/badge.svg)](https://github.com/latamgateway/fitbank_api/actions/workflows/ci.yml)
+
 # fitbank_api (WIP)
 
 This is a gem used to wrap the FitBank API in classes for convenience. For more detailed info about the functionality [generate documentation](#generate-documentation)
