@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fitbank_api (0.7.2)
+    fitbank_api (0.7.3)
       cpf_cnpj
       sorbet-runtime
 
@@ -126,4 +126,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   2.3.21
+   2.3.22
