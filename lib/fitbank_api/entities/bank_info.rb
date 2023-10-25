@@ -9,19 +9,21 @@ module FitBankApi
       extend T::Sig
 
       sig { returns(String) }
-      attr_accessor :bank_code, :bank_account, :bank_agency, :bank_account_digit
+      attr_accessor :bank_code, :bank_account, :bank_agency, :bank_account_digit, :account_type
 
-      sig { params(bank_code: String, bank_agency: String, bank_account: String, bank_account_digit: String).void }
+      sig { params(bank_code: String, bank_agency: String, bank_account: String, bank_account_digit: String, account_type: String).void }
       def initialize(
         bank_code:,
         bank_agency:,
         bank_account:,
-        bank_account_digit: ''
+        bank_account_digit: '',
+        account_type: ''
       )
         @bank_code = bank_code
         @bank_agency  = bank_agency
         @bank_account = bank_account
         @bank_account_digit = bank_account_digit
+        @account_type = account_type
       end
 
       sig { returns(T::Hash[Symbol, T.untyped]) }
@@ -33,7 +35,8 @@ module FitBankApi
           Bank: @bank_code,
           BankBranch: @bank_agency,
           BankAccount: @bank_account,
-          BankAccountDigit: @bank_account_digit
+          BankAccountDigit: @bank_account_digit,
+          AccountType: @account_type
         }
       end
 
@@ -42,7 +45,8 @@ module FitBankApi
         @bank_code == other.bank_code \
           && @bank_agency == other.bank_agency \
           && @bank_account == other.bank_account \
-          && @bank_account_digit == other.bank_account_digit
+          && @bank_account_digit == other.bank_account_digit \
+          && @account_type == other.account_type
       end
     end
   end
