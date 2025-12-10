@@ -5,8 +5,8 @@ require_relative 'lib/fitbank_api/version'
 Gem::Specification.new do |spec|
   spec.name          = 'fitbank_api'
   spec.version       = FitBankApi::VERSION
-  spec.authors       = ['Latam Gateway']
-  spec.email         = ['kimpastro@gmail.com']
+  spec.authors       = ['Gowd Instituição de Pagamentos Ltda']
+  spec.email         = ['engineering@gowd.com']
 
   spec.summary       = 'Wrapper classes for the FitBank REST API'
   spec.description   = 'Contains classes which can be used to perform PIX payments using the FitBank REST API'

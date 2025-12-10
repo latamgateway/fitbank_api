@@ -27,8 +27,10 @@ RSpec.describe FitBankApi::Pix::PayoutDetail do
         expect(payout_detail.sender_bank_info).to eq(payout.sender_bank_info)
         expect(payout_detail.status).to eq(FitBankApi::Entities::PayoutDetail::Status::Created)
         expect(payout_detail.fitbank_payout_id).to eq(payout_id)
-        expect(payout_detail.end_to_end_id).not_to be_blank
-        expect(payout_detail.receipt_url).not_to be_blank
+        expect(payout_detail.end_to_end_id).not_to be_nil
+        expect(payout_detail.end_to_end_id).not_to be_empty
+        expect(payout_detail.receipt_url).not_to be_nil
+        expect(payout_detail.receipt_url).not_to be_empty
         expect(payout_detail.receiver_document).to eq(payout.receiver_document)
         expect(payout_detail.receiver_name).to eq(payout.receiver_name)
         expect(payout_detail.total_value).to eq(payout.value)
