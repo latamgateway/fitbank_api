@@ -111,6 +111,30 @@ module FitBankApi
         @receiver_name = receiver_name
       end
 
+      sig { params(status_string: String).returns(FitBankApi::Entities::PayoutDetail::Status) }
+      # Parse status string to Status enum, handling Ruby 3.x compatibility
+      def self.parse_status(status_string)
+        case status_string
+        when 'created'
+          Status::Created
+        when 'canberegister'
+          Status::CanBeRegister
+        when 'registering'
+          Status::Registering
+        when 'registered'
+          Status::Registered
+        when 'error'
+          Status::Error
+        when 'settled'
+          Status::Settled
+        when 'canceled'
+          Status::Canceled
+        else
+          # Default to Created if unknown status
+          Status::Created
+        end
+      end
+
       sig { params(response_body: T::Hash[Symbol, T.untyped]).returns(FitBankApi::Entities::PayoutDetail) }
       # Initialize the deails about a payout from the response body
       # returned by the API call.
@@ -134,7 +158,7 @@ module FitBankApi
         FitBankApi::Entities::PayoutDetail.new(
           sender_bank_info: sender_bank_info,
           receiver_bank_info: receiver_bank_info,
-          status: FitBankApi::Entities::PayoutDetail::Status.deserialize(response_body[:Status].downcase),
+          status: parse_status(response_body[:Status].downcase),
           fitbank_payout_id: response_body[:DocumentNumber].to_s,
           request_id: response_body[:Identifier],
           payment_date: Date.parse(response_body[:PaymentDate]),
