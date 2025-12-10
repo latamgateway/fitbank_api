@@ -5,8 +5,10 @@ require 'date'
 
 FactoryBot.define do
   factory :collection_order_payer, class: FitBankApi::Entities::CollectionOrderPayer do
+    skip_create
+    
     initialize_with do
-      new(
+      FitBankApi::Entities::CollectionOrderPayer.new(
         name: "Test Payer",
         birth_date: Date.new(2000,1,1),
         tax_number: "88899988811",

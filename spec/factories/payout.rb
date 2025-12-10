@@ -5,6 +5,8 @@ require 'securerandom'
 
 FactoryBot.define do
   factory :manual_payout, class: FitBankApi::Pix::Payout do
+    skip_create
+    
     sender_bank_info do
       build(
         :bank_info,
@@ -28,7 +30,7 @@ FactoryBot.define do
     credentials { build(:credentials) }
 
     initialize_with do
-      new(
+      FitBankApi::Pix::Payout.new(
         sender_bank_info: sender_bank_info,
         receiver_bank_info: receiver_bank_info,
         credentials: credentials,
