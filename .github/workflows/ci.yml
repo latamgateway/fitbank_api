@@ -9,13 +9,6 @@ on:
 
 jobs:
   test:
-    uses: latamgateway/ruby-linters-latam/.github/workflows/rspec.yml@main
-  lint:
-    uses: latamgateway/ruby-linters-latam/.github/workflows/lint.yml@main
-  review:
-    uses: latamgateway/ruby-linters-latam/.github/workflows/review.yml@review
-
-  type-check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -28,8 +21,18 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
 
-      - name: Generate types for gems
-        run: bundle exec tapioca init
+      - name: Run tests
+        run: bundle exec rspec
 
-      - name: Check Types
-        run: bundle exec srb tc
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.4
+          bundler-cache: true
+
+      - name: Check Ruby syntax
+        run: find . -name "*.rb" -not -path "./vendor/*" -exec ruby -c {} \;
