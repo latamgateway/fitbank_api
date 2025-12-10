@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fitbank_api (0.7.3)
+    fitbank_api (1.0.0)
       cpf_cnpj
       sorbet-runtime
 
@@ -129,6 +129,7 @@ DEPENDENCIES
   dotenv
   factory_bot
   fitbank_api!
+  i18n
   pry-byebug
   rspec
   simplecov
