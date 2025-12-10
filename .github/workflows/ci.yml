@@ -20,6 +20,12 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
+          cache-version: 1
+
+      - name: Install dependencies
+        run: |
+          bundle config unset deployment
+          bundle install --jobs 4 --retry 3
 
       - name: Run tests
         run: bundle exec rspec
@@ -33,6 +39,12 @@ jobs:
         with:
           ruby-version: 3.1.4
           bundler-cache: true
+          cache-version: 1
+
+      - name: Install dependencies
+        run: |
+          bundle config unset deployment
+          bundle install --jobs 4 --retry 3
 
       - name: Check Ruby syntax
         run: find . -name "*.rb" -not -path "./vendor/*" -exec ruby -c {} \;
